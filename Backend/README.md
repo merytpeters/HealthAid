@@ -1,0 +1,1 @@
+This is the backend directory of the HealthAid repository
