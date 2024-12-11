@@ -1,0 +1,36 @@
+:root {
+  margin: 0;
+  font-family: sans-serif;
+}
+.nav {
+  color: #f8c954;
+  margin: 20px;
+  font-size: 14px;
+
+  
+}
+.hero {
+  /* Image */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(./assets/R.jpeg);
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  
+}
+/* .hero-text{
+  margin: 300px 20px 5px 20px;
+} */
+
+.button {
+  border: 1px solid #f8c954;
+  border-radius: 50px;
+  color: #000000;
+  text-align: center;
+  /* background-color: transparent; */
+  font-size: 20px;
+  margin: 50px;
+  padding: 10px 50px;
+  cursor: pointer;
+}
