@@ -10,4 +10,6 @@ HealthAid is a comprehensive personal health management assistant designed to ad
 - **Health Symptoms Journal**: Track your health and wellness over time by logging symptoms.
 - **Home Medicine Inventory**: Organize and keep track of your home medications.
 
+## Technologies 
+
 
