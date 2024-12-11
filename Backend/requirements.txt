@@ -1,0 +1,5 @@
+flask
+flask-sqlalchemy
+mysql-connector-python
+flask-jwt-extended
+python-dotenv
