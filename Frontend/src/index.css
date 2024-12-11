@@ -1,7 +1,16 @@
-:root {
-  margin: 0;
-  font-family: sans-serif;
+@font-face {
+  font-family: 'Forum';
+  src: url('./assets/fonts/Forum-Regular.ttf') format('truetype'); 
+  font-weight: normal;
+  font-style: normal;
 }
+
+:root {
+  border: 5px solid black;
+  font-family: 'Forum', sans-serif;
+
+}
+
 .nav {
   color: #f8c954;
   margin: 20px;
@@ -11,17 +20,33 @@
 }
 .hero {
   /* Image */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(./assets/R.jpeg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./assets/R.jpeg);
   /* Position and center the image to scale nicely on all screens */
-  background-position: center;
+  background-position: center ;
   background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
+  background-size: cover cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* border: 2px solid black; */
+}
+.hero-text{
+  margin-left: 50px;
+  margin-top: 15rem;
   
 }
-/* .hero-text{
-  margin: 300px 20px 5px 20px;
-} */
+.hero-text > h1 {
+  font-size: 51px;
+  display: inline;
+  color: #f8c954;
+}
+.hero-text > i {
+  font-size: 16px;
+  color: #ffffff;
+  display: block;
+  margin-top: 5px;
+}
 
 .button {
   border: 1px solid #f8c954;
@@ -34,3 +59,4 @@
   padding: 10px 50px;
   cursor: pointer;
 }
+
