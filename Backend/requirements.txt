@@ -4,3 +4,4 @@ mysql-connector-python
 flask-jwt-extended
 python-dotenv
 mysqlclient
+flask-migrate
