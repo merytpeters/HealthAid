@@ -5,6 +5,8 @@ import pic from "../assets/exercise.jpg";
 
 export const Login = () => {
   const [data, setData] = useState({ email: "", password: "" });
+  const [emailError, setEmailError] = useState("");
+  const [passError, setPassError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -13,6 +15,8 @@ export const Login = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(data);
+    if (data.email == "") setEmailError("Email is needed");
+    if (data.password == "") setPassError("Password is required");
   };
   return (
     <div className="main">
@@ -31,6 +35,7 @@ export const Login = () => {
               value={data.email}
               onChange={handleChange}
             />
+            {emailError && <p className="error">*{emailError}</p>}
           </div>
           <div>
             <label htmlFor="password">Password:</label>
@@ -41,6 +46,7 @@ export const Login = () => {
               value={data.password}
               onChange={handleChange}
             />
+            {passError && <p className="error">*{passError}</p>}
           </div>
           <div className="btn">
             <button type="submit">Login</button>
@@ -54,7 +60,7 @@ export const Login = () => {
               </p>
             </div>
             <div className="forgot">
-                <p className="links">Forgot password</p>
+              <p className="links">Forgot password</p>
             </div>
           </span>
         </form>
