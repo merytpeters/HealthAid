@@ -1,28 +1,30 @@
 @font-face {
-  font-family: 'Forum';
-  src: url('./assets/fonts/Forum-Regular.ttf') format('truetype'); 
+  font-family: "Forum";
+  src: url("./assets/fonts/Forum-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
+body {
+  margin: 0px;
+  padding: 0px;
+}
 
 :root {
-  border: 5px solid black;
-  font-family: 'Forum', sans-serif;
-
+  /* border: 5px solid black; */
+  font-family: "Forum", sans-serif;
 }
 
 .nav {
   color: #f8c954;
   margin: 20px;
   font-size: 14px;
-
-  
 }
 .hero {
   /* Image */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./assets/R.jpeg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(./assets/R.jpeg);
   /* Position and center the image to scale nicely on all screens */
-  background-position: center ;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover cover;
   position: absolute;
@@ -31,10 +33,9 @@
   width: 100%;
   /* border: 2px solid black; */
 }
-.hero-text{
+.hero-text {
   margin-left: 50px;
   margin-top: 15rem;
-  
 }
 .hero-text > h1 {
   font-size: 51px;
@@ -59,4 +60,3 @@
   padding: 10px 50px;
   cursor: pointer;
 }
-
