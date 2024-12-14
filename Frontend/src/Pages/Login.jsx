@@ -14,9 +14,18 @@ export const Login = () => {
   };
   const submitHandler = (e) => {
     e.preventDefault();
+    if (data.email == "") {
+      setEmailError("Email is needed");
+      setTimeout(() => setEmailError(""), 5000);
+      return;
+    }
+    if (data.password == "") {
+      setPassError("Password is required");
+      setTimeout(() => setPassError(""), 5000);
+
+      return;
+    }
     console.log(data);
-    if (data.email == "") setEmailError("Email is needed");
-    if (data.password == "") setPassError("Password is required");
   };
   return (
     <div className="main">

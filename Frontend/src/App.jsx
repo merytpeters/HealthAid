@@ -1,6 +1,7 @@
 
 import Hero from './Components/Hero'
 import { Login } from './Pages/Login'
+import {Signup} from "./Pages/Signup"
 import './App.css'
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     <>
       {/* <Hero /> */}
       <Login />
+      {/* <Signup /> */}
     </>
   )
 }
