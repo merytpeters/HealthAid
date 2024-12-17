@@ -10,3 +10,13 @@ body {
   font-family: 'Forum', sans-serif;
   /* border: 2px solid blue; */
 }
+.ldn-txt {
+  font-size: 20px;
+  text-decoration: underline;
+  text-align: center;
+}
+.ldn-txt1{
+  font-size: 20px;
+  text-align: center;
+  padding-left: 15px;
+}

@@ -65,12 +65,15 @@
   border: 2px solid #f8c954;
   color: #000000;
   /* background-color: #f8c954; */
-  border-radius: 10px;
   text-align: center;
   padding: 5px;
   width: fit-content;
   height: fit-content;
-  font-size: 20px;
+  /* font-size: 20px; */
+  /* border-radius: 36px; */
+}
+img {
+  border: 2px solid black;
 }
 
 
