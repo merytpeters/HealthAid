@@ -1,10 +1,81 @@
-/* :root {
-    border: 5px solid red;
-    margin: 0;
+/* @font-face {
+  font-family: 'Forum';
+  src: url('./assets/fonts/Forum-Regular.ttf') format('truetype'); 
+  font-weight: normal;
+  font-style: normal;
 } */
-/* :root {
-  margin: 0;
-  font-family: sans-serif;
-} */
+
+#root {
+  /* font-family: 'Forum', sans-serif; */
+  width: 100%;
+
+}
+
+.nav {
+  color: #f8c954;
+  margin: 20px;
+  font-size: 14px;
+}
+.nav  a {
+  text-decoration: underline;
+  color: #f8c954;
+}
+.nav a:active {
+  text-decoration: underline;
+  color: #0000ff;
+}
+
+.hero {
+  /* Image */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),url(./assets/Physical-Therapy.png);
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center ;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.hero-text{
+  margin-left: 50px;
+  margin-top: 15rem;
+  
+}
+.hero-text > h1 {
+  font-size: 51px;
+  display: inline;
+  color: #f8c954;
+}
+.hero-text > i {
+  font-size: 16px;
+  color: #ffffff;
+  display: block;
+  margin-top: 5px;
+}
+
+.button {
+  border: 1px solid #f8c954;
+  border-radius: 50px;
+  color: #000000;
+  text-align: center;
+  /* background-color: transparent; */
+  font-size: 20px;
+  margin: 50px;
+  padding: 10px 50px;
+  cursor: pointer;
+}
+.card {
+  border: 2px solid #f8c954;
+  color: #000000;
+  /* background-color: #f8c954; */
+  text-align: center;
+  padding: 5px;
+  width: fit-content;
+  height: fit-content;
+  /* font-size: 20px; */
+  /* border-radius: 36px; */
+}
+img {
+  border: 2px solid black;
+}
+
+
 
   
