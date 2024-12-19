@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from config import Config
 from .db import db
 from .routes.auth import auth_bp
+from .routes.healthInventory_routes import inventory_bp
 
 
 
@@ -19,4 +20,5 @@ def create_app():
     migrate.init_app(app, db)
 
     app.register_blueprint(auth_bp, url_prefix='/auth')
+    app.register_blueprint(inventory_bp, url_prefix='/inventory')
     return app
