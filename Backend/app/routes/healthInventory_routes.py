@@ -13,7 +13,9 @@ inventory_bp = Blueprint('inventory', __name__)
 def get_inventory():
     """Retrieve all items from in the inventory"""
     try:
-        items = CRUD.read(model=HealthInventory)
+        search_term = request.args.get('search', None)
+
+        items = HealthInventory.view_inventory(search_term=search_term)
 
         items_list = [item.to_dict() for item in items]
         return jsonify(items_list), 200
@@ -22,6 +24,7 @@ def get_inventory():
 
 @inventory_bp.route('/search', methods=['GET'])
 def search():
+    """Search inventory"""
     pass
 
 @inventory_bp.route('/?filter=restock', methods=['GET'])
