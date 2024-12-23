@@ -1,24 +1,37 @@
 import {FaBell} from 'react-icons/fa';
+import {NavLink} from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({isLandingPage = false}) => {
+  if (isLandingPage) {
     return (
+      <>
+      <p style={{display: "inline-block", margin: '20px 300px 20px 20px', color: '#f8c954'}} >
+        <span>HealthAid</span>
+        <span style={{display: 'block'}}><a>Personal Health Management</a></span>
+      </p>
+      <NavLink style={{float: "right", marginTop: '20px'}} className={({isActive}) => isActive ? 'nav' : 'nav-active'}>Signup</NavLink>
+      </>
+    )
+  }
+    
+  return (
         <>
-          <nav>
+          <nav className='navbar'>
             <p style={{display: "inline-block", margin: '20px 300px 20px 20px', color: '#f8c954'}} >
-                <span><NavLink></NavLink></span>
+                <span>HealthAid</span>
                 <span style={{display: 'block'}}><a>Personal Health Management</a></span>
             </p>
-            <span className="nav"><NavLink to='#' className={({isActive}) => isActive ? 'nav-active' : ''}>Home</NavLink></span>
-            <span className="nav"><NavLink to='#' className={({isActive}) => isActive ? 'nav-active' : ''}>Journal</NavLink></span>
-            <span className="nav"><NavLink to='#' className={({isActive}) => isActive ? 'nav-active' : ''}>Inventory</NavLink></span>
-            <span className="nav"><NavLink to='#' className={({isActive}) => isActive ? 'nav-active' : ''}>FirstAid</NavLink></span>
-            <span className="nav"><NavLink to='#' className={({isActive}) => isActive ? 'nav-active' : ''}>Symptom Checker</NavLink></span>
-            <span className="nav"><NavLink to='#' className={({isActive}) => isActive ? 'nav-active' : ''}>Drug Interaction Checker</NavLink></span>
-            <span className="nav"><NavLink to='#' className={({isActive}) => isActive ? 'nav-active' : ''}>Pill Reminder</NavLink></span>
-            <span className='nav'><FaBell /></span>
+            <NavLink to='/' className={({isActive}) => isActive ? 'nav' : 'nav-active'}>Home</NavLink>
+            <NavLink to='#' className={({isActive}) => isActive ? 'nav' : 'nav-active'}>Journal</NavLink>
+            <NavLink to='#' className={({isActive}) => isActive ? 'nav' : 'nav-active'}>Inventory</NavLink>
+            <NavLink to='#' className={({isActive}) => isActive ? 'nav' : 'nav-active'}>FirstAid</NavLink>
+            <NavLink to='#' className={({isActive}) => isActive ? 'nav' : 'nav-active'}>Symptom Checker</NavLink>
+            <NavLink to='#' className={({isActive}) => isActive ? 'nav' : 'nav-active'}>Drug Interaction Checker</NavLink>
+            <NavLink to='#' className={({isActive}) => isActive ? 'nav' : 'nav-active'}>Pill Reminder</NavLink>
+            <FaBell  className='nav'/>
             
           </nav>
         </>
       )
 };
-export default Navbar;
+export default Navbar;  
