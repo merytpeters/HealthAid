@@ -45,15 +45,42 @@ class Dashboard(db.Model):
         return dashboard_data
     
     def plot_metrics(self):
-        """Graphs"""
-        metrics = [
-            self.health_metrics.blood_sugar,
-            self.health_metrics.heart_rate
-        ]
-        labels = ['Blood Sugar', 'Heart Rate']
-        plt.bar(labels, metrics)
-        plt.title('Health Metrics')
+        """Graphs health metrics against time"""
+        if not self.health_metrics:
+            print("No health metrics to plot")
+            return
+        
+        times = []
+        blood_sugar = []
+        heart_rate = []
+        systolic_bp = []
+        diastolic_bp = []
+
+        metric = self.health_metrics
+        if metric.timestamp is not None:
+            times.append(metric.timestamp)
+
+        blood_sugar.append(metric.blood_sugar or 0)
+        heart_rate.append(metric.heart_rate or 0)
+        systolic_bp.append(metric.systolic or 0)
+        diastolic_bp.append(metric.diastolic or 0)
+        
+        if not times:
+            print("No valid timestamps found in health metrics.")
+            return
+
+        plt.figure(figsize=(10, 6))
+        plt.plot(times, blood_sugar, label='Blood Sugar')
+        plt.plot(times, heart_rate, label='Heart Rate')
+        plt.plot(times, systolic_bp, label='Systolic BP')
+        plt.plot(times, diastolic_bp, label='Diastolic BP')
+        plt.xlabel('Time')
+        plt.ylabel('Metrics')
+        plt.title('Health Metrics Over Time')
+        plt.legend()
         plt.savefig('health_metrics.png')
+        plt.close()
+        print("Plot saved as health_metrics.png")
 
 
 class PersonalInformation(db.Model):
@@ -128,17 +155,31 @@ class HealthMetrics(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     blood_sugar = db.Column(db.Float, nullable=True, default=0.0)
+    blood_sugar_unit = db.Column(db.String, nullable=False, default="mg/dL")
     systolic = db.Column(db.Integer, nullable=True, default=0)
-    diastolic = db.Column(db.Integer, nullable=True, default=0) # need to add units for these
-    blood_pressure_unit = ''
+    diastolic = db.Column(db.Integer, nullable=True, default=0) 
+    blood_pressure_unit = db.Column(db.String, nullable=False, default="mmHg")
     heart_rate = db.Column(db.Integer, nullable=True, default=0)
-    heart_rate_unit = ''
+    heart_rate_unit = db.Column(db.String, nullable=False, default="bpm")
     body_temperature = db.Column(db.Float, nullable=True, default=0.0)
-    body_temperature_unit = ''
+    body_temperature_unit = db.Column(db.String, nullable=False, default="C")
+    timestamp = db.Column(db.DateTime, default=datetime.now(tz=timezone.utc))
     
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
             setattr(self, key, value)
+
+    def convert_blood_sugar_to_mmol_per_l(self):
+        """Converts blood sugar to mmol per liter"""
+        if self.blood_sugar_unit == "mg/dL":
+            return self.blood_sugar / 18.0182
+        return self.blood_sugar
+    
+    def convert_temperature_to_fahrenheit(self):
+        """Converts temperature to fahrenheit"""
+        if self.body_temperature_unit == "C":
+            return (self.body_temperature * 9/5) + 32
+        return self.body_temperature
 
     def add_metrics(self, blood_sugar, systolic, diastolic, heart_rate, body_temperature):
         if blood_sugar < 0 or body_temperature < 0:

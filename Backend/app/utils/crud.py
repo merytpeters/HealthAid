@@ -6,6 +6,7 @@ Global CRUD functions to be used in other classes
 from app import db
 from sqlalchemy.exc import IntegrityError
 import openai
+import time
 from config import Config
 
 # Ensure that OpenAI API key is loaded
@@ -69,10 +70,10 @@ class CRUD:
             db.session.rollback()
             raise Exception(f'Failed to delete item: {e}')
 
-        import openai
-import time
+        #import openai
+#import time
 
-class CRUD:
+# class CRUD: redundant
     @staticmethod
     def get_first_aid_guide(query):
         """
