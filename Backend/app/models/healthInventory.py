@@ -2,16 +2,16 @@
 """Home Medicine Inventory Feature"""
 from app.db import db
 from datetime import date, timedelta
-from utils.crud import CRUD
+from app.utils.crud import CRUD
 
 
 class HealthInventory(db.Model):
     """An Inventory class to keep track of home health supplies"""
     __tablename__ = 'inventory'
     id = db.Column(db.Integer, primary_key=True)
-    drug_name = db.Column(db.String, nullable=False)
+    drug_name = db.Column(db.String(255), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
-    unit = db.Column(db.String, nullable=False)
+    unit = db.Column(db.String(50), nullable=False)
     expiry_date = db.Column(db.Date, nullable=False)
     inventory_date = db.Column(db.Date, default=date.today, nullable=False)
     restock_date = db.Column(db.Date, nullable=True)

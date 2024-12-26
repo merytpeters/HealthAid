@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """"Health Inventory Routes"""
 from flask import Blueprint, request, jsonify
-from models.healthInventory import HealthInventory
-from utils.crud import CRUD
+from app.models.healthInventory import HealthInventory
+from app.utils.crud import CRUD
 
 
 # Blueprint for inventory routes
