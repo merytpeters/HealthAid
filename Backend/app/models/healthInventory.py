@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 """Home Medicine Inventory Feature"""
 from app.db import db
-<<<<<<< HEAD
 from datetime import date, timedelta
-=======
 from datetime import date, timedelta, datetime
->>>>>>> 42bb57cb70f68328bfb4a8d793b74340add6bde7
 from app.utils.crud import CRUD
 
 
