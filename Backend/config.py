@@ -13,6 +13,7 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.getenv('SECRET_KEY')
+    API_KEY = os.getenv('API_KEY')
     JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
     # Set up the OpenAI API key
 

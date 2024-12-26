@@ -95,7 +95,7 @@ def delete_item(item_id):
     try:
         inventory = HealthInventory()
         deleted_item = inventory.delete_item(item_id)
-        return jsonify({"message": f"Item {item_id} deleted successfully"}), 200
+        return jsonify({"message": f"Item {deleted_item} deleted successfully"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

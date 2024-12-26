@@ -9,3 +9,5 @@ marshmallow
 matplotlib
 pydeps
 marshmallow_sqlalchemy
+openai
+flask_mail
