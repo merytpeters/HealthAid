@@ -3,7 +3,6 @@ from app import db
 from app.models.pillReminder import PillReminder
 from datetime import datetime
 from flask_mail import Message
-from app import mail  # Ensure mail is correctly imported
 
 pill_reminder_bp = Blueprint('pill_reminder', __name__)
 
@@ -69,7 +68,7 @@ def view_pill_reminders():
 def send_notification(id):
     reminder = PillReminder.query.get_or_404(id)
 
-    # If email notification is enabled, send it
+    
     if reminder.email_notification:
         send_email_notification(reminder)
         return jsonify({"message": f"Notification sent for {reminder.drug_name}."}), 200
@@ -78,10 +77,11 @@ def send_notification(id):
 
 def send_email_notification(reminder):
     """Send email notification for pill reminder"""
+    from app import mail
     try:
         msg = Message(
             f"Time to take your {reminder.drug_name}",
-            recipients=["isahabdulsalam03@gmail.com"],  # Change to the user's email or make it dynamic
+            recipients=["isahabdulsalam03@gmail.com"],
             body=f"Hello, it's time to take your {reminder.dosage} of {reminder.drug_name}."
         )
         mail.send(msg)

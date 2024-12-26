@@ -11,6 +11,7 @@ from app.routes.auth import auth_bp
 from app.routes.healthInventory_routes import inventory_bp
 from app.routes.pillReminder_routes import pill_reminder_bp
 from app.routes.first_aid_guide_routes import first_aid_bp
+from app.routes.dashboard_routes import dashboard_bp
 
 # Initialize extensions
 migrate = Migrate()
@@ -34,5 +35,6 @@ def create_app():
     app.register_blueprint(inventory_bp, url_prefix='/inventory')
     app.register_blueprint(pill_reminder_bp, url_prefix='/pill_reminder')
     app.register_blueprint(first_aid_bp, url_prefix='/first_aid')
+    app.register_blueprint(dashboard_bp, url_prefix='/dashboard')
 
     return app

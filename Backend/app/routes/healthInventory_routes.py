@@ -2,11 +2,8 @@
 """"Health Inventory Routes"""
 from flask import Blueprint, request, jsonify
 from app.models.healthInventory import HealthInventory
-<<<<<<< HEAD
 from app.utils.crud import CRUD
-=======
 from datetime import date
->>>>>>> 42bb57cb70f68328bfb4a8d793b74340add6bde7
 
 
 # Blueprint for inventory routes
@@ -98,7 +95,7 @@ def delete_item(item_id):
     try:
         inventory = HealthInventory()
         deleted_item = inventory.delete_item(item_id)
-        return jsonify({"message": f"Item {item_id} deleted successfully"}), 200
+        return jsonify({"message": f"Item {deleted_item} deleted successfully"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

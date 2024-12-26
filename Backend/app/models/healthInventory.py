@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Home Medicine Inventory Feature"""
 from app.db import db
-from datetime import date, timedelta
 from datetime import date, timedelta, datetime
 from app.utils.crud import CRUD
 
@@ -57,17 +56,12 @@ class HealthInventory(db.Model):
     def restock_notification(self):
         """Notifies user when restock date reached"""
         today = date.today()
-        items_to_restock = CRUD.read(
-            model=HealthInventory
-        )
+        items_to_restock = CRUD.read(model=HealthInventory)
         items_to_restock_today = [item for item in items_to_restock if item.restock_date == today]
         for item in items_to_restock_today:
             print(f'{item.drug_name} needs restocking!')
 
-    def add_item(
-            self, drug_name, quantity, unit, expiry_date,
-            restock_date=None
-            ):
+    def add_item(self, drug_name, quantity, unit, expiry_date, restock_date=None):
         """Add item to the inventory"""
         if isinstance(expiry_date, str):
             expiry_date = datetime.strptime(expiry_date, '%Y-%m-%d').date()  # Convert string to date
@@ -76,7 +70,6 @@ class HealthInventory(db.Model):
             quantity=quantity,
             unit=unit,
             expiry_date=expiry_date, 
-            # inventory_date already set by default in class atrribute
             restock_date=restock_date
         )
         CRUD.create(new_item)
@@ -87,7 +80,6 @@ class HealthInventory(db.Model):
         if search_term:
             items = [item for item in items if search_term.lower() in item.drug_name.lower()]
         return items
-        
 
     def restock(self, item, quantity_to_add, restock_date=None):
         """Restock Inventory"""
@@ -96,7 +88,6 @@ class HealthInventory(db.Model):
                 raise ValueError('Quantity to add must be a positive number')
             # Increase quantity
             item.quantity += quantity_to_add
-
             # Update restock_date or set to current date
             item.restock_date = restock_date or date.today()
             CRUD.update(item)
@@ -105,16 +96,11 @@ class HealthInventory(db.Model):
     def items_due_for_restock(self, restock_date=None):
         """
         Retrieves items due for restock.
-
         :param restock_date: The date to use for restock filtering (default: today's date)
         :return: List of items due for restock
         """
         restock_date = restock_date or date.today()
-        items_due = CRUD.read(
-            model=HealthInventory,
-            filters={"restock_date__lte": restock_date}
-        )
-        
+        items_due = CRUD.read(model=HealthInventory, filters={"restock_date__lte": restock_date})
         return items_due
 
     def delete_item(self, item=None):
@@ -133,9 +119,8 @@ class HealthInventory(db.Model):
                     break
                 else:
                     print("Invalid input, please enter 'y' or 'n'.")
-
         else:
-            # Delete all item
+            # Delete all items
             while True:
                 confirm = input('Are you sure you want to delete all items from the inventory? (y/n): ')
                 if confirm.lower() == 'y':
@@ -149,13 +134,13 @@ class HealthInventory(db.Model):
                 else:
                     print("Invalid input, please enter 'y' or 'n'.")
 
-    def delete_expired_items(self, expired_date):
+    def delete_expired_items(self, expired_date=None):
+        """Deletes expired items from the inventory."""
         expired_date = expired_date or date.today()
         expired_items = CRUD.read(
             model=HealthInventory,
             filters={"expiry_date__lte": expired_date}
         )
-
         deleted_items = []
         for item in expired_items:
             deleted = self.delete_item(item=item)
