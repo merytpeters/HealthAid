@@ -1,0 +1,19 @@
+.nav-items{
+  width: 20%;
+  height: 100vh;
+  /* border-right: 1px solid black; */
+  box-shadow: 0 0 0 1.5px #e9e3e4;
+  /* background-color: #f8c954;
+  color: white; */
+}
+.menus {
+  width: 95%;
+  height: 95%;
+  padding: 10px;
+}
+.menu {
+  /* border-bottom: 1px solid #e9e3e4; */
+  padding: 15px;
+  height: 5%;
+  cursor: pointer;
+}
