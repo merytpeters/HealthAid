@@ -5,3 +5,9 @@ flask-jwt-extended
 python-dotenv
 mysqlclient
 flask-migrate
+marshmallow
+matplotlib
+pydeps
+marshmallow_sqlalchemy
+openai
+flask_mail
