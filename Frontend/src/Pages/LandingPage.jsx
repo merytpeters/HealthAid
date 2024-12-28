@@ -20,6 +20,7 @@ const LandingPage = () => {
     <p className='ldn-txt'>Features</p>
     <LandingCard 
     image={Bottle}
+    newStyle={{fontSize: "20px", borderRadius: "36px"}}
     >
       <strong> Drug Interaction Checker</strong>
       <p>
@@ -31,6 +32,7 @@ const LandingPage = () => {
     <LandingCard 
     image={Sick}
     imgPosition="left"
+    newStyle={{fontSize: "20px", borderRadius: "36px"}}
     >
       <strong> Sypmtoms Checker</strong>
       <p>
@@ -43,6 +45,7 @@ const LandingPage = () => {
     <LandingCard 
     image={Bell}
     imgPosition="right"
+    newStyle={{fontSize: "20px", borderRadius: "36px"}}
     >
       <strong> Pill Reminder with Notifications</strong>
       <p>
@@ -55,6 +58,7 @@ const LandingPage = () => {
     <LandingCard 
     image={Writing}
     imgPosition="left"
+    newStyle={{fontSize: "20px", borderRadius: "36px"}}
     >
       <strong> Health Symptoms Journal</strong>
       <p>
@@ -66,6 +70,7 @@ const LandingPage = () => {
     <LandingCard 
     image={Inventory}
     imgPosition="right"
+    newStyle={{fontSize: "20px", borderRadius: "36px"}}
     >
       <strong> Home Medicine Inventory</strong>
       <p>
@@ -77,6 +82,7 @@ const LandingPage = () => {
     <LandingCard 
     image={FirstAid}
     imgPosition="left"
+    newStyle={{fontSize: "20px", borderRadius: "36px"}}
     >
       <strong> First Aid Guide</strong>
       <p>

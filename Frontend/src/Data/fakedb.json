@@ -1,0 +1,25 @@
+{
+    "symptoms" : [
+        {
+            "id": "1",
+            "description": "Headache,Fever,Vomitting,Loose stool"
+        },
+        {
+            "id": "2",
+            "description": "Dizziness,Leg pain,Coughing,Muscle aches,Fatigue,Chest pain, breathing problems,cough,Diarrhea, nausea"
+        },
+        {
+            "id": "3",
+            "description": "Fever or chills,Cough,Shortness of breath,Sore throat,Congestion or runny nose,New loss of taste or smell,Fatigue,Muscle or body aches,Headache,Nausea"
+        }
+    ],
+    "inventory" : [
+        
+    ]
+
+    
+}
+
+
+
+

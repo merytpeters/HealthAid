@@ -1,4 +1,4 @@
-import Button from "./button";
+import Button from "./Button";
 import Navbar from "./Navbar"
 
 const Hero = () => {
@@ -7,10 +7,10 @@ const Hero = () => {
         <section className="hero">
             <Navbar isLandingPage = {true}/>
             <div className="hero-text">
-                <h1>Your Personal Health <br></br>Companion</h1>
+                <h1>Your Personal Health <br/>Companion</h1>
                 <i>Your Health, Your Way</i>
             </div>
-            <Button fill = 'true'/>
+            <Button newStyle={{ backgroundColor: "#f8c954", color: "white" ,  margin: "20px 50px"}}/>
         </section>
     )
   

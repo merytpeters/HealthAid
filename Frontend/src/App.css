@@ -15,7 +15,7 @@
   margin: 0px 20px;
 }
 .hero {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),url(./assets/Physical-Therapy.png);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(./assets/Hero1.jpg);
   background-position: center ;
   background-repeat: no-repeat;
   background-size: cover;
@@ -26,7 +26,7 @@
 }
 .hero-text{
   margin-left: 50px;
-  margin-top: 15rem;
+  margin-top: 10rem;
   
 }
 .hero-text > h1 {
@@ -44,22 +44,21 @@
 .button {
   border: 1px solid #f8c954;
   border-radius: 50px;
-  color: #000000;
   text-align: center;
   /* background-color: transparent; */
   font-size: 20px;
-  margin: 50px;
+  /* margin: 20px 50px; */
   padding: 10px 50px;
   cursor: pointer;
 }
-/* .card {
+.card {
   border: 2px solid #f8c954;
   color: #000000;
   text-align: center;
   padding: 15px;
   width: fit-content;
   height: fit-content;
-} */
+}
 img {
   border: 2px solid black;
 }
@@ -73,6 +72,29 @@ img {
   font-size: 20px;
   text-align: center;
   padding: 5px;
+}
+
+.icon-card {
+  border: 2px solid #f8c954;
+  display: inline-block;
+}
+
+.input-flex {
+  position : relative;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.symptom-list {
+  display: flex;
+  flex-direction: row;
+  height: 80vh;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+ 
 }
 
 
