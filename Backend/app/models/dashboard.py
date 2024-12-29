@@ -82,6 +82,31 @@ class Dashboard(db.Model):
         plt.close()
         print("Plot saved as health_metrics.png")
 
+    def plot_piechart(self):
+        """Piechart of metrics"""
+        if not self.health_metrics:
+            print('No metrics to plot')
+            return []
+
+        blood_sugar = []
+        heart_rate = []
+        systolic_bp = []
+        diastolic_bp = []
+        
+        labels = ['Blood Sugar', 'Heart Rate', 'Systolic BP', 'Diastolic BP']
+        sizes = [blood_sugar[0], heart_rate[0], systolic_bp[0], diastolic_bp[0]]
+        colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue']
+        explode = (0.1, 0, 0, 0)  # explode 1st slice
+
+        plt.figure(figsize=(8, 8))
+        plt.pie(sizes, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, startangle=140)
+        plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+        plt.title('Health Metrics Distribution')
+        plt.savefig('health_metrics_piechart.png')
+        plt.close()
+        print("Pie chart saved as health_metrics_piechart.png")
+        diastolic_bp = []
+    
 
 class PersonalInformation(db.Model):
     """Personal Information"""
