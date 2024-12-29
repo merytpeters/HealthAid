@@ -1,17 +1,10 @@
 import React from "react";
 
-export const Input = ({type, newStyle= {}, placeholder = ""}) => {
-
+export const Input = ({type, }) => {
   return (
     <div>
       <form>
-        <label htmlFor="type"></label>
-        <input 
-        type={type}
-        name="symptomInput"
-        placeholder={placeholder}
-        style={{...newStyle}}
-        />
+        <input type='' />
       </form>
     </div>
   );

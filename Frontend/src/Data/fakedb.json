@@ -1,27 +1,49 @@
 {
-    "symptoms" : [
-        {
-            "id": "1",
-            "description": "Headache,Fever,Vomitting,Loose stool"
-        },
-        {
-            "id": "2",
-            "description": "Dizziness,Leg pain,Coughing,Muscle aches,Fatigue,Chest pain, breathing problems,cough,Diarrhea, nausea"
-        },
-        {
-            "id": "3",
-            "description": "Fever or chills,Cough,Shortness of breath,Sore throat,Congestion or runny nose,New loss of taste or smell,Fatigue,Muscle or body aches,Headache,Nausea"
-        }
-    ],
-    "inventory" : [
-        {
-            "id": "1"
-        }
-    ]
-
-    
+  "symptoms": [
+    {
+      "id": "95e8",
+      "description": "Watery diarrhea, Vomiting, Leg cramps, Restlessness or irritability, Dehydration",
+      "date": "2024-12-28"
+    },
+    {
+      "id": "0b13",
+      "description": "Watery diarrhea, Vomiting, Leg cramps, Restlessness or irritability, Dehydration",
+      "date": "2024-12-28"
+    },
+    {
+      "id": "0fbb",
+      "description": "Watery diarrhea, Vomiting, Leg cramps, Restlessness or irritability, Dehydration",
+      "date": "2024-12-29"
+    },
+    {
+      "id": "bc4a",
+      "description": "Watery diarrhea, Vomiting, Leg cramps, Restlessness or irritability, Dehydration",
+      "date": "2024-12-29"
+    },
+    {
+      "id": "7d83",
+      "description": "Watery diarrhea, Vomiting, Leg cramps, Restlessness or irritability, Dehydration",
+      "date": "2024-12-29"
+    },
+    {
+      "id": "9261",
+      "description": "Watery diarrhea, Vomiting, Leg cramps, Restlessness or irritability, Dehydration",
+      "date": "2024-12-29"
+    },
+    {
+      "id": "94b3",
+      "description": "Watery diarrhea, Vomiting, Leg cramps, Restlessness or irritability, Dehydration",
+      "date": "2024-12-29"
+    },
+    {
+      "id": "0769",
+      "description": "Watery diarrhea, Vomiting, Leg cramps, Restlessness or irritability, Dehydration",
+      "date": "2024-12-29"
+    }
+  ],
+  "inventory": [
+    {
+      "id": "1"
+    }
+  ]
 }
-
-
-
-
