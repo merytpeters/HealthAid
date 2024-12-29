@@ -1,7 +1,6 @@
 import { useState , useEffect} from "react";
-import SymptomList from "../Components/SymptomList";
 import Card from "../Components/Card";
-import {FaPlusCircle, FaTimesCircle, FaEdit, FaTimes} from 'react-icons/fa';
+import {FaPlusCircle, FaTimesCircle, FaEdit,} from 'react-icons/fa';
 const Journal = () => {
     const [showInput, setShowInput] = useState(false);
     const [getData, setGetData] = useState([]);
