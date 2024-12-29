@@ -22,7 +22,7 @@ const Navbar = ({isLandingPage = false}) => {
                 <span style={{display: 'block'}}><a>Personal Health Management</a></span>
             </p>
             <NavLink to='/' className={({isActive}) => isActive ? 'nav' : 'nav-active'}>Home</NavLink>
-            <NavLink to='#' className={({isActive}) => isActive ? 'nav' : 'nav-active'}>Journal</NavLink>
+            <NavLink to='/' className={({isActive}) => isActive ? 'nav' : 'nav-active'}>Journal</NavLink>
             <NavLink to='#' className={({isActive}) => isActive ? 'nav' : 'nav-active'}>Inventory</NavLink>
             <NavLink to='#' className={({isActive}) => isActive ? 'nav' : 'nav-active'}>FirstAid</NavLink>
             <NavLink to='#' className={({isActive}) => isActive ? 'nav' : 'nav-active'}>Symptom Checker</NavLink>

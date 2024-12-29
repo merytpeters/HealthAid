@@ -1,6 +1,6 @@
 import Card from "./Card";
 
-const LandingCard = ({children , image, size, round, imgPosition = "right"}) => {
+const LandingCard = ({children , image, newStyle = {}, imgPosition = "right"}) => {
     const imgStyle = {
         width: "150px", 
         borderColor: "white",
@@ -12,7 +12,7 @@ const LandingCard = ({children , image, size, round, imgPosition = "right"}) => 
     if (imgPosition === "left")
         return (
             <section style={{display: "flex", justifyContent}}> 
-            <Card size= {size} round={round} marginDirection= {imgPosition}>
+            <Card  newStyle={{...newStyle, margin: "0 0 0 100px"}}>
                 {children}
             </Card>
             <img  src= {image} style={imgStyle}/>
@@ -22,7 +22,7 @@ const LandingCard = ({children , image, size, round, imgPosition = "right"}) => 
     return (
         <section style={{display: "flex", justifyContent}}> 
         <img  src= {image} style={imgStyle}/>
-        <Card size= {size} round={round} marginDirection= {imgPosition}>
+        <Card   newStyle={{...newStyle, margin: "0 100px 0 0"}} >
             {children}
         </Card>
         
