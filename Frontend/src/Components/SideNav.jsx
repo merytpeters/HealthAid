@@ -10,7 +10,7 @@ export const SideNav = () => {
         </Link>
 
         <div className="menu">
-          <Link to="/auth/login">Symptom Checker</Link>
+          <Link to="/auth/journal">Symptom Journal</Link>
         </div>
         <div className="menu">
           <Link to="/auth/signup">Symptom Checker</Link>

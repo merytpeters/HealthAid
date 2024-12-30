@@ -14,6 +14,7 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.getenv('SECRET_KEY')
     API_KEY = os.getenv('API_KEY')
+    DRUG_API_KEY = os.getenv('DRUG_API_KEY')
     JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
     # Set up the OpenAI API key
 

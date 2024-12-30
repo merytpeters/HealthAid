@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import "../Styles/login.css";
 import pic from "../assets/exercise.jpg";
@@ -65,7 +66,10 @@ export const Login = () => {
             <div className="forgot"></div> */}
             <div className="sign-up">
               <p>
-                New Here? <a className="links">signup</a>
+                New Here?{" "}
+                <a className="links">
+                  <Link to="/signup">signup</Link>
+                </a>
               </p>
             </div>
             <div className="forgot">
