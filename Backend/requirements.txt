@@ -11,3 +11,6 @@ pydeps
 marshmallow_sqlalchemy
 openai
 flask_mail
+pytest
+pytest-flask
+pymysql

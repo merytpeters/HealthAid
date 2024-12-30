@@ -3,3 +3,5 @@ __pycache__
 migrations
 .mypy_cache
 venv
+.pytest_cache
+healthaid.db
