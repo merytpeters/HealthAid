@@ -1,4 +1,5 @@
 .env
+tests
 __pycache__
 migrations
 .mypy_cache
