@@ -1,0 +1,54 @@
+{
+  "symptoms": [
+    {
+      "id": "95e8",
+      "description": "Watery diarrhea, Vomiting, Leg cramps, Restlessness or irritability, Dehydration",
+      "date": "2024-12-28"
+    },
+    {
+      "id": "0b13",
+      "description": "Watery diarrhea, Vomiting, Leg cramps, Restlessness or irritability, Dehydration",
+      "date": "2024-12-28"
+    },
+    {
+      "id": "0fbb",
+      "description": "Watery diarrhea, Vomiting, Leg cramps, Restlessness or irritability, Dehydration",
+      "date": "2024-12-29"
+    },
+    {
+      "id": "bc4a",
+      "description": "Watery diarrhea, Vomiting, Leg cramps, Restlessness or irritability, Dehydration",
+      "date": "2024-12-29"
+    },
+    {
+      "id": "7d83",
+      "description": "Watery diarrhea, Vomiting, Leg cramps, Restlessness or irritability, Dehydration",
+      "date": "2024-12-29"
+    },
+    {
+      "id": "9261",
+      "description": "Watery diarrhea, Vomiting, Leg cramps, Restlessness or irritability, Dehydration",
+      "date": "2024-12-29"
+    },
+    {
+      "id": "94b3",
+      "description": "Watery diarrhea, Vomiting, Leg cramps, Restlessness or irritability, Dehydration",
+      "date": "2024-12-29"
+    },
+    {
+      "id": "0769",
+      "description": "Watery diarrhea, Vomiting, Leg cramps, Restlessness or irritability, Dehydration",
+      "date": "2024-12-29"
+    }
+  ],
+  "inventory": [
+    {
+      "id": "1"
+    }
+  ],
+  "graphData": [
+    {
+      
+    }
+  ]
+}
