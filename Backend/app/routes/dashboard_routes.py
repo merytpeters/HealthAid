@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from utils.crud import CRUD
+from app.utils.crud import CRUD
 from app.models.dashboard import Dashboard, DashboardSchema, PersonalInformation, PhysicalAttributes, HealthMetrics
 
 dashboard_bp = Blueprint('dashboard', __name__)

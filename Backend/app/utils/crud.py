@@ -10,7 +10,7 @@ import time
 from config import Config
 
 # Ensure that OpenAI API key is loaded
-openai.api_key = Config.OPENAI_API_KEY
+openai.api_key = Config.API_KEY
 
 class CRUD:
     """Global create, read, update and delete"""
