@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import "../Styles/signup.css";
 
@@ -156,7 +157,13 @@ export const Signup = () => {
         <span className="field">
           <div className="field-div">
             <p>
-              Already have an account? <i>login</i>
+              Already have an account?{" "}
+              <i>
+                <Link to="/login" style={{ textDecoration: "none" }}>
+                  {" "}
+                  login
+                </Link>
+              </i>
             </p>
           </div>
           <div className="field-div">
