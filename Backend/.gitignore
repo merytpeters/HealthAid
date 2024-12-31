@@ -4,8 +4,6 @@ __pycache__
 migrations
 .mypy_cache
 venv
-<<<<<<< HEAD
-=======
 .pytest_cache
 healthaid.db
->>>>>>> 415281a3c8538c5fd3e5778a89090cce22c7291a
+health_aid.db
