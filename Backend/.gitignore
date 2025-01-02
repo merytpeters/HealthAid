@@ -6,3 +6,4 @@ migrations
 venv
 .pytest_cache
 healthaid.db
+health_aid.db
