@@ -14,7 +14,7 @@ def signup():
         data = request.get_json()
 
         # Validate incoming data
-        required_fields = ['first_name', 'last_name', 'email', 'password', 'gender', 'weight', 'height']
+        required_fields = ['first_name', 'last_name', 'email', 'password', 'gender', 'weight', 'height', 'username']
         if not all(field in data for field in required_fields):
             return jsonify({"message": "Missing required fields"}), 400
 
@@ -76,16 +76,15 @@ def login():
 
 # Logout route for invalidating the token (client-side)
 @auth_bp.route('/logout', methods=['POST'])
-@auth_bp.route('/logout', methods=['POST'])
 @jwt_required()  # Protect the route, requiring a valid token to log out
 def logout():
     try:
         current_user = get_jwt_identity()  # Get the user identity (e.g., user id)
         print(f"DEBUG: Current user: {current_user}")  # Log the current user identity
-        
+
         if not isinstance(current_user, str):
             raise ValueError("The user identity is not a string.")
-        
+
         # Here we just inform the client to delete the token locally
         return jsonify({"message": "Successfully logged out"}), 200
     except Exception as e:
@@ -103,7 +102,12 @@ def profile():
 
         return jsonify({
             "username": user.username,
-            "email": user.email
+            "email": user.email,
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+            "gender": user.gender,
+            "weight": user.weight,
+            "height": user.height
         }), 200
     except Exception as e:
         return jsonify({"message": f"An error occurred: {str(e)}"}), 500

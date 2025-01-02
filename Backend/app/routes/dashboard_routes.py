@@ -90,8 +90,6 @@ def delete_dashboard(id):
     dashboard = Dashboard.query.get_or_404(id)
     CRUD.delete(dashboard)
     return '', 204
-<<<<<<< HEAD
-=======
 
 @dashboard_bp.route('/displaymetriclinegraph/<int:id>', methods=['GET'])
 def display_line_graph(id):
@@ -102,4 +100,3 @@ def display_line_graph(id):
 def display_piechart(id):
     dashboard = Dashboard.query.get_or_404(id)
     dashboard.plot_piechart()
->>>>>>> 415281a3c8538c5fd3e5778a89090cce22c7291a

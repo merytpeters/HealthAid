@@ -19,7 +19,6 @@ class Config:
 
     DRUG_API_KEY = os.getenv('DRUG_API_KEY')
     JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
-    # Set up the OpenAI API key
 
     # JWT Secret Key
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
