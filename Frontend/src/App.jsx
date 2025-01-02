@@ -9,7 +9,7 @@ import { Login } from "./Pages/Login";
 import { Signup } from "./Pages/Signup";
 import LandingPage from "./Pages/LandingPage";
 import Journal from "./Pages/Journal";
-import Hero from "./Components/Hero";
+import { SymptomsChecker } from "./Pages/SymptomsChecker";
 import "./App.css";
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
 
         <Route path="/" element={<NavLayouts />}>
           <Route path="/journal" element={<Journal />} />
+          <Route path="/symptoms" element={<SymptomsChecker />} />
         </Route>
       </>
     )

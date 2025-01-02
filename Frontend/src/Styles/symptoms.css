@@ -1,0 +1,44 @@
+.symp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 83vh;
+}
+.search-btn {
+  border: 1px solid gray;
+  padding: 3px;
+  width: 35%;
+  height: 8%;
+  border-radius: 18px;
+}
+.search-btn input {
+  width: 90%;
+  height: 98%;
+  outline: none;
+  border: 0px;
+}
+.search-btn button {
+  width: 5%;
+  border: 0px;
+  background-color: white;
+  cursor: pointer;
+}
+.search-btn button img {
+  height: 15px;
+  width: 15px;
+  border: 0px;
+}
+.symptoms {
+  display: flex;
+  flex-wrap: wrap;
+  width: 35%;
+  margin: 10px;
+}
+.item {
+  border: 1.5px solid #f8c954;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 15px;
+}
