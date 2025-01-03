@@ -36,8 +36,20 @@ class CRUD:
             Query result(s) based on the filters.
         """
         query = db.session.query(model)
-        if filters:
-            query = query.filter_by(**filters)
+        for key, value in filters.items():
+            if '__' in key:
+                column_name, operator = key.split('__')
+                column = getattr(model, column_name, None)
+
+                if column:
+                    if operator == 'lte':
+                        query = query.filter(column <= value)
+                    elif operator == 'gte':
+                        query = query.filter(column >= value)
+            else:
+                column = getattr(model, key, None)
+                if column:
+                    query = query.filter(column == value)
         return query.all()
 
     @staticmethod
