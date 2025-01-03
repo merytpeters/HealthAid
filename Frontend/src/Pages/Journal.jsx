@@ -12,8 +12,10 @@ const Journal = () => {
     useEffect(() => {
         const symptomLoader = async () => {
             try {
-                const res = await fetch('/api/symptoms');
+                const res = await fetch('/api/medical_journal/get_symptoms');
+                console.log(res);
                 const allSymptoms = await res.json();
+                console.log("this is all symptoms ", allSymptoms)
                 setGetData(allSymptoms)
             } catch (error) {
                 console.log('Error fetching data', error)
@@ -31,10 +33,10 @@ const Journal = () => {
         if (addsymptom === "" || addsymptom === " " || addsymptom === ",")
             return;
         const newSymptom = {
-            description : addsymptom,
-            date : formattedDate
+            "symptoms" : addsymptom,
+            "timestamp" : formattedDate
         }
-        const res = await fetch('/api/symptoms', {
+        const res = await fetch('/api/medical_journal/add_symptom', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -48,7 +50,7 @@ const Journal = () => {
         const confirm = window.confirm("Are you sure want to delete?")
         if (!confirm)
             return;
-        const res = await fetch(`/api/symptoms/${id}`, {
+        const res = await fetch(`/api/medical_journal/delete_symptom/${id}`, {
             method: "DELETE",
         });
         window.location.reload();
@@ -63,11 +65,11 @@ const Journal = () => {
 
         const updatedSymptom = {
             id: id,
-            description : addsymptom,
-            date : formattedDate
+            "symptoms" : addsymptom,
+            "timestamp" : formattedDate
         }
 
-        const res = await fetch(`/api/symptoms/${id}`, {
+        const res = await fetch(`/api/medical_journal/update_symptom/${id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json'
@@ -144,8 +146,8 @@ const Journal = () => {
                 <div className="symptom-list">
                     {getData.map((symptomCard, idx) => 
                     {
-                        const symptoms = symptomCard.description.split(",");
-                        const date = symptomCard.date;
+                        const symptoms = symptomCard.symptoms.split(",");
+                        const date = symptomCard.timestamp;
                         const id = symptomCard.id;
                         return (
                             <Card 
