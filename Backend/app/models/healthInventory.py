@@ -73,13 +73,15 @@ class HealthInventory(db.Model):
             restock_date=restock_date
         )
         CRUD.create(new_item)
+        return new_item
 
-    def view_inventory(self, search_term=None):
+    def view_inventory(self, search_term=None, page=1, per_page=10):
         """Search and filter inventory"""
         items = CRUD.read(HealthInventory)
         if search_term:
             items = [item for item in items if search_term.lower() in item.drug_name.lower()]
-        return items
+            paginated_items = items.limit(per_page).offset((page - 1) * per_page)
+        return paginated_items.all()
 
     def restock(self, item, quantity_to_add, restock_date=None):
         """Restock Inventory"""

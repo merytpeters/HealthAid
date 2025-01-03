@@ -2,7 +2,6 @@
 """"Health Inventory Routes"""
 from flask import Blueprint, request, jsonify
 from app.models.healthInventory import HealthInventory
-from app.utils.crud import CRUD
 from datetime import date
 
 
@@ -35,7 +34,15 @@ def search():
         if not search_term:
             return jsonify({"error": "Search term is required"}), 400
         inventory = HealthInventory()
-        items = inventory.view_inventory(search_term=search_term)
+        items = []
+        page = 1
+        per_page = 10
+        while True:
+            paginated_items = inventory.view_inventory(search_term=search_term, page=page, per_page=per_page)
+            if not paginated_items:
+                break
+            items.extend(paginated_items)
+            page += 1
 
         items_list = [item.to_dict() for item in items]
         return jsonify(items_list), 200
