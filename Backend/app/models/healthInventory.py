@@ -72,8 +72,10 @@ class HealthInventory(db.Model):
             expiry_date=expiry_date, 
             restock_date=restock_date
         )
-        CRUD.create(new_item)
-        return new_item
+        added_item = CRUD.create(new_item)
+        if added_item is None:
+            return None
+        return added_item
 
     def view_inventory(self, search_term=None, page=1, per_page=10):
         """Search and filter inventory"""
@@ -102,7 +104,7 @@ class HealthInventory(db.Model):
         :return: List of items due for restock
         """
         restock_date = restock_date or date.today()
-        items_due = CRUD.read(model=HealthInventory, filters={"restock_date__lte": restock_date})
+        items_due = CRUD.read(model=HealthInventory, restock_date__lte=restock_date)
         return items_due
 
     def delete_item(self, item=None):
@@ -150,5 +152,3 @@ class HealthInventory(db.Model):
         
         return deleted_items
 
-# inventory = HealthInventory()
-# print(type(inventory))

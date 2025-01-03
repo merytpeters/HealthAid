@@ -73,6 +73,8 @@ def add_item():
 
         inventory = HealthInventory()
         added_item = inventory.add_item(**item_data)
+        if added_item is None:
+            return jsonify({"error": "Failed to add item"}), 500
         return jsonify(added_item.to_dict()), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 500

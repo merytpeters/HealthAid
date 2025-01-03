@@ -21,6 +21,7 @@ class CRUD:
         try:
             db.session.add(item)
             db.session.commit()
+            return item
         except IntegrityError as e:
             db.session.rollback()
             raise Exception(f'Failed to create item: {e}')
