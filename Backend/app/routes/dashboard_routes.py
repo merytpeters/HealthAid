@@ -1,4 +1,5 @@
-from flask import Blueprint, request, jsonify
+import os
+from flask import Blueprint, request, jsonify, send_file
 from app.utils.crud import CRUD
 from app.models.dashboard import Dashboard, DashboardSchema, PersonalInformation, PhysicalAttributes, HealthMetrics
 
@@ -16,9 +17,13 @@ def get_dashboard_by_id(id):
     dashboard_schema = DashboardSchema()
     return jsonify(dashboard_schema.dump(dashboard))
 
-@dashboard_bp.route('/dashboard', methods=['POST'])
+@dashboard_bp.route('/create', methods=['POST'])
 def create_dashboard():
     data = request.get_json()
+    user_id = data.get('user_id')
+    if not user_id:
+        return jsonify({"error": "user_id is required"}), 400
+    
     if not data:
         return jsonify({"error": "No input data provided"}), 400
 
@@ -33,11 +38,12 @@ def create_dashboard():
     physical_attr = PhysicalAttributes(**physical_attr_data)
     health_metrics = HealthMetrics(**health_metrics_data)
 
-    CRUD.create(personal_info)
-    CRUD.create(physical_attr)
-    CRUD.create(health_metrics)
+    personal_info = CRUD.create(personal_info)
+    physical_attr = CRUD.create(physical_attr)
+    health_metrics = CRUD.create(health_metrics)
 
     dashboard = Dashboard(
+        user_id=user_id,
         personal_information_id=personal_info.id,
         physical_attributes_id=physical_attr.id,
         health_metrics_id=health_metrics.id
@@ -94,9 +100,11 @@ def delete_dashboard(id):
 @dashboard_bp.route('/displaymetriclinegraph/<int:id>', methods=['GET'])
 def display_line_graph(id):
     dashboard = Dashboard.query.get_or_404(id)
-    dashboard.plot_metrics()    
+    dashboard.plot_metrics()  
+    return send_file('health_metrics.png', mimetype='image/png')
 
 @dashboard_bp.route('/displaymetricpiechart/<int:id>', methods=['GET'])
 def display_piechart(id):
     dashboard = Dashboard.query.get_or_404(id)
     dashboard.plot_piechart()
+    return send_file(os.path.join(os.getcwd(), 'health_metrics_piechart.png'), mimetype='image/png')

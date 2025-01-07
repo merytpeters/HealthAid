@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """User dashboard, concepts to look at : SQLALCHEMY relationships, marshmallow, matplotlib and matlib"""
+import os
 from marshmallow import fields
 from app.db import db
 from datetime import datetime, timezone
 import matplotlib.pyplot as plt
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
+import matplotlib
+matplotlib.use('Agg')
 
 
 class Dashboard(db.Model):
@@ -99,11 +102,17 @@ class Dashboard(db.Model):
         heart_rate = self.health_metrics.heart_rate or 0
         systolic_bp = self.health_metrics.systolic or 0
         diastolic_bp = self.health_metrics.diastolic or 0
+
+        sizes = [blood_sugar, heart_rate, systolic_bp, diastolic_bp]
+        if all(size == 0 for size in sizes):
+            print('All metrics are zero, pie chart cannot be plotted.')
+            return []
         
         labels = ['Blood Sugar', 'Heart Rate', 'Systolic BP', 'Diastolic BP']
-        sizes = [blood_sugar, heart_rate, systolic_bp, diastolic_bp]
         colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue']
         explode = (0.1, 0, 0, 0)  # explode 1st slice
+
+        piechart_path = os.path.join(os.getcwd(), 'health_metrics_piechart.png')
 
         plt.figure(figsize=(8, 8))
         plt.pie(sizes, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, startangle=140)
@@ -111,8 +120,7 @@ class Dashboard(db.Model):
         plt.title('Health Metrics Distribution')
         plt.savefig('health_metrics_piechart.png')
         plt.close()
-        print("Pie chart saved as health_metrics_piechart.png")
-        diastolic_bp = []
+        print(f"Pie chart saved as {piechart_path}")
     
 
 class PersonalInformation(db.Model):
