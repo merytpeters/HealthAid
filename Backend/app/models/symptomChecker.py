@@ -22,7 +22,7 @@ class SymptomChecker:
 
         # Add Authorization header
         headers = {
-            "Authorization": f"Bearer {self.api_key}:{computed_hash_string}"
+            "Authorization": f"{self.api_key}:{computed_hash_string}"
         }
 
         # Make POST request
@@ -31,7 +31,7 @@ class SymptomChecker:
             response.raise_for_status()
             return response.json().get('Token')
         except requests.exceptions.HTTPError as e:
-            print(f"HTTP Error: {e}")
+            print(f"HTTP Error: {e}, Response Content: {response.text}")
             return None
         except Exception as e:
             print(f"Error: {e}")
@@ -40,7 +40,7 @@ class SymptomChecker:
     def get_symptoms(self, token):
         url = f"{self.base_url}/symptoms"
         headers = {
-            "Authorization": f"Bearer {token}"
+            "Authorization": f"{token}"
         }
         try:
             response = requests.get(url, headers=headers)
@@ -51,13 +51,13 @@ class SymptomChecker:
             response.raise_for_status()
             return response.json()
         except requests.exceptions.HTTPError as e:
-            print(e)
+            print(f"HTTP Error: {e}, Response Content: {response.text}")
             return []
 
     def get_diagnosis(self, token, symptoms, gender, year_of_birth):
         url = f"{self.base_url}/diagnosis"
         headers = {
-            "Authorization": f"Bearer {token}"
+            "Authorization": f"{token}"
         }
         params = {
             "symptoms": symptoms,
@@ -80,8 +80,8 @@ class SymptomChecker:
 if __name__ == "__main__":
     # Load environment variables
     load_dotenv()
-    api_key = os.getenv("API_KEY")
-    secret_key = os.getenv("SECRET_KEY")
+    api_key = os.getenv("APIMEDIC_API_KEY")
+    secret_key = os.getenv("SYMPTOM_CHECKER_SECRET_KEY")
     print("API_KEY:", api_key)
     print("SECRET_KEY:", secret_key)
 
@@ -101,4 +101,3 @@ if __name__ == "__main__":
         symptoms_list = [10, 15]
         diagnosis = checker.get_diagnosis(token, symptoms_list, "male", 1980)
         print("Diagnosis:", diagnosis)
-

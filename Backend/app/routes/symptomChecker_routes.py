@@ -10,8 +10,8 @@ load_dotenv()
 symptom_checker_bp = Blueprint('symptom_checker', __name__)
 
 # Fetch API keys and secret key from environment variables
-api_key = os.getenv("API_KEY")
-secret_key = os.getenv("SECRET_KEY")
+api_key = os.getenv("APIMEDIC_API_KEY")
+secret_key = os.getenv("SYMPTOM_CHECKER_SECRET_KEY")
 
 # Ensure API keys and secret key are available
 if not api_key or not secret_key:

@@ -3,6 +3,7 @@ from app.db import db
 from app.models.users import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from app.models.dashboard import Dashboard, PersonalInformation, PhysicalAttributes, HealthMetrics
 
 # Initialize Blueprint
 auth_bp = Blueprint('auth', __name__)
@@ -41,7 +42,45 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
 
-        return jsonify({"message": "User created successfully!"}), 201
+        # Create related data for the Dashboard
+        personal_info = PersonalInformation(
+            name=f"{data['first_name']} {data['last_name']}",
+            age=data.get('age', None)  # Optional field
+        )
+        db.session.add(personal_info)
+        db.session.commit()
+
+        physical_attributes = PhysicalAttributes(
+            weight=data['weight'],
+            height=data['height'],
+            gender=data['gender']
+        )
+        db.session.add(physical_attributes)
+        db.session.commit()
+
+        health_metrics = HealthMetrics(
+            blood_sugar=data.get('blood_sugar', None),  # Optional field
+            systolic=data.get('systolic', None),  # Optional field
+            diastolic=data.get('diastolic', None),  # Optional field
+            heart_rate=data.get('heart_rate', None),  # Optional field
+            body_temperature=data.get('body_temperature', None)  # Optional field
+        )
+        db.session.add(health_metrics)
+        db.session.commit()
+
+        # Create the dashboard
+        new_dashboard = Dashboard(
+            user_id=new_user.id,
+            personal_information_id=personal_info.id,
+            physical_attributes_id=physical_attributes.id,
+            health_metrics_id=health_metrics.id
+        )
+        db.session.add(new_dashboard)
+        db.session.commit()
+
+
+        return jsonify({
+            "message": "User and dashboard created successfully!"}), 201
     except Exception as e:
         return jsonify({"message": f"An error occurred: {str(e)}"}), 500
 

@@ -51,7 +51,7 @@ class CRUD:
                 column = getattr(model, key, None)
                 if column:
                     query = query.filter(column == value)
-        return query.all()
+        return query
 
     @staticmethod
     def update(item, **fields):
