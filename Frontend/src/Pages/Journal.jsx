@@ -13,7 +13,6 @@ const Journal = () => {
         const symptomLoader = async () => {
             try {
                 const res = await fetch('/api/medical_journal/get_symptoms');
-                console.log(res);
                 const allSymptoms = await res.json();
                 console.log("this is all symptoms ", allSymptoms)
                 setGetData(allSymptoms)
