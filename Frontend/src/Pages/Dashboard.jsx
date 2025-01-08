@@ -8,6 +8,7 @@ import BloodSugar from "../assets/blood-Sugar.svg?react";
 import BloodPressure from "../assets/blood-Pressure.svg?react";
 import Temp from "../assets/Temp.svg?react";
 import LineChart from "../Components/LineChart";
+import PieChart from "../Components/PieChart";
 import Card from '../Components/Card'
 
 
@@ -30,7 +31,25 @@ const Dashboard = () => {
             const res = await fetch('api/graphData')
             const data = await res.json()
         }
-    }, [beatValue, sugarValue,pressureValueBottom,pressureValueTop,tempValue,name,age,weight,height])
+    }, [beatValue, sugarValue,pressureValueBottom,pressureValueTop,tempValue,name,age,weight,height]);
+
+    const saveInput = () => {
+        const newInput = {
+            "name": "afuah",
+            "age": "53",
+            "weight": "34",
+            "height": "161",
+            "gender": "female",
+            "bloodSugar": 12,
+            "bloodPressure": {
+              "systolic": 8,
+              "diastolic": 72
+            },
+            "heartRate": 0,
+            "temp": 60,
+            "time": "2024-10-20T06:00:00",
+        }
+    }
     
 
     return (
@@ -122,7 +141,6 @@ const Dashboard = () => {
                     </form>
                 </Card>
             </div>
-            <LineChart />
 
         </div>
         :
@@ -182,7 +200,10 @@ const Dashboard = () => {
                     </div>
                 </Card>
             </div>
-            <LineChart />
+            <div style={{display: "flex", flexDirection: "row"}}>
+                <LineChart />
+                <PieChart />
+            </div>
             
         </div>
         }
