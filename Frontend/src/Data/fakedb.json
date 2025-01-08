@@ -48,39 +48,79 @@
   ],
   "graphData": [
     {
-      "id": 1,
-      "year": 2016,
-      "month": 80000,
-      "hour": 823,
-      "value": ""
+      "name" : "afuah",
+      "age" : "53", 
+      "weight" : "34",
+      "height" : "161",
+      "gender" : "female",
+      "bloodSugar" : 12,
+      "bloodPressure" : {
+          "systolic": 8,
+          "diastolic": 72
+      },
+      "heartRate" : 0,
+      "temp" : 60,
+      "time" : "2024-10-20T06:00:00"
     },
     {
-      "id": 2,
-      "year": 2017,
-      "month": 45677,
-      "hour": 345,
-      "value": ""
+      "name" : "afuah",
+      "age" : "53", 
+      "weight" : "34",
+      "height" : "161",
+      "gender" : "female",
+      "bloodSugar" : 4,
+      "bloodPressure" : {
+          "systolic": 30,
+          "diastolic": 60
+      },
+      "heartRate" : 12,
+      "temp" : 36,
+      "time" : "2024-10-20T08:00:00"
     },
     {
-      "id": 3,
-      "year": 2018,
-      "month": 78888,
-      "hour": 555,
-      "value": ""
+      "name" : "afuah",
+      "age" : "53", 
+      "weight" : "34",
+      "height" : "161",
+      "gender" : "female",
+      "bloodSugar" : 20,
+      "bloodPressure" : {
+          "systolic": 25,
+          "diastolic": 90
+      },
+      "heartRate" : 38,
+      "temp" : 90,
+      "time" : "2024-10-20T09:00:00"
     },
     {
-      "id": 4,
-      "year": 2019,
-      "month": 90000,
-      "hour": 4555,
-      "value": ""
+      "name" : "afuah",
+      "age" : "53", 
+      "weight" : "34",
+      "height" : "161",
+      "gender" : "female",
+      "bloodSugar" : 15,
+      "bloodPressure" : {
+          "systolic": 40,
+          "diastolic": 52
+      },
+      "heartRate" : 30,
+      "temp" : 50,
+      "time" : "2024-10-20T10:00:00"
     },
     {
-      "id": 5,
-      "year": 2020,
-      "month": 4300,
-      "hour": 234,
-      "value": ""
+      "name" : "afuah",
+      "age" : "53", 
+      "weight" : "34",
+      "height" : "161",
+      "gender" : "female",
+      "bloodSugar" : 50,
+      "bloodPressure" : {
+          "systolic": 42,
+          "diastolic": 52
+      },
+      "heartRate" : 32,
+      "temp" : 50,
+      "time" : "2024-10-20T11:00:00"
     }
   ]
 }

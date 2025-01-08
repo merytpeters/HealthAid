@@ -1,6 +1,7 @@
 import Chart from "chart.js/auto";
 // import {CategoryScale} from "chart.js";
 import {useState, useEffect} from "react";
+import {useLoaderData} from "react-router-dom"
 import { FaPen, FaPenSquare} from 'react-icons/fa';
 import HeartBeat from "../assets/heartBeat.svg?react";
 import BloodSugar from "../assets/blood-Sugar.svg?react";
@@ -9,24 +10,8 @@ import Temp from "../assets/Temp.svg?react";
 import LineChart from "../Components/LineChart";
 import Card from '../Components/Card'
 
-// Chart.register(CategoryScale);
+
 const Dashboard = () => {
-    const [chartData, setChartData] = useState({
-        labels: [2016, 2017,2018],
-        datasets: [
-            {
-                label: 'Popularity of colours',
-                data: [56, 23, 96],
-                backgroundColor: [
-                    'red',
-                    'green',
-                    'yellow'
-                ],
-                borderColor: "black",
-                borderWidth: 2
-            }
-        ],
-    });
     const [showInput, setShowInput]  = useState(false);
     const [beatValue, setBeatValue] = useState(98);
     const [sugarValue, setSugarValue] = useState(80);
@@ -137,7 +122,7 @@ const Dashboard = () => {
                     </form>
                 </Card>
             </div>
-            <LineChart chartData={chartData}/>
+            <LineChart />
 
         </div>
         :
@@ -146,11 +131,11 @@ const Dashboard = () => {
                 <FaPenSquare size={40} style={{fill: "#f8c954", marginRight: "85px"}} onClick={clickEdit}/>
             </div>
             <Card newStyle={{margin: "0 50px", marginBottom: "30px",display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-evenly",fontSize: "20px"}}>
-                <div style={{display: "flex", flexDirection: "column", margin: "5px 60px"}}>
+                <div style={{display: "flex", flexDirection: "column", margin: "0px 60px"}}>
                         <p>Name: {name}</p>
                         <p>Age: {age} yrs</p>
                 </div>
-                <div style={{display: "flex", flexDirection: "column", margin: "5px 60px"}}>
+                <div style={{display: "flex", flexDirection: "column", margin: "0px 60px"}}>
                         <p>Weight: {weight} kgs</p>
                         <p>Height: {height} cm</p>
                 </div>
@@ -197,7 +182,7 @@ const Dashboard = () => {
                     </div>
                 </Card>
             </div>
-            <LineChart chartData={chartData}/>
+            <LineChart />
             
         </div>
         }
@@ -205,4 +190,6 @@ const Dashboard = () => {
 
     )
 }
+
+
 export default Dashboard;
