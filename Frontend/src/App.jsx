@@ -11,6 +11,8 @@ import LandingPage from "./Pages/LandingPage";
 import Journal from "./Pages/Journal";
 import Dashboard from './Pages/Dashboard';
 import { SymptomsChecker } from "./Pages/SymptomsChecker";
+import { Inventory } from "./Pages/Inventory";
+import DynamicTables from "./Pages/dynaminx";
 import "./App.css";
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
           <Route path="/journal" element={<Journal />} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path="/symptoms" element={<SymptomsChecker />} />
+          <Route path="/test" element={<DynamicTables />} />
+          <Route path="/inventory" element={<Inventory />} />
         </Route>
       </>
     )

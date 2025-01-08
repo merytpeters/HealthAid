@@ -43,7 +43,8 @@
   ],
   "inventory": [
     {
-      "id": "1"
+      "id": "1",
+      "drugnaame": "para"
     }
   ],
   "graphData": [
