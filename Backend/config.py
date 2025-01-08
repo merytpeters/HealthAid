@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+import app
 
 # Load environment variables from the .env file
 load_dotenv()
@@ -22,8 +23,6 @@ class Config:
     # SYMPTOM_CHECKER_SECRET_KEY = os.getenv('SYMPTOM_CHECKER_SECRET_KEY')
     # API Key for OpenFDA
     DRUG_API_KEY = os.getenv('DRUG_API_KEY')
-
-    JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
 
     # JWT Secret Key
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')

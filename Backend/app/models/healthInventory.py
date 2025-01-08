@@ -9,6 +9,7 @@ class HealthInventory(db.Model):
     """An Inventory class to keep track of home health supplies"""
     __tablename__ = 'inventory'
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     drug_name = db.Column(db.String(255), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     unit = db.Column(db.String(50), nullable=False)
@@ -53,15 +54,16 @@ class HealthInventory(db.Model):
             raise ValueError('Expiry date must be set to calculate restock date.')
         return self.restock_date
 
-    def restock_notification(self):
+    @staticmethod
+    def restock_notification():
         """Notifies user when restock date reached"""
         today = date.today()
         items_to_restock = CRUD.read(model=HealthInventory)
-        items_to_restock_today = [item for item in items_to_restock if item.restock_date == today]
+        items_to_restock_today = [item for item in items_to_restock if item.restock_date <= today]
         for item in items_to_restock_today:
             print(f'{item.drug_name} needs restocking!')
 
-    def add_item(self, drug_name, quantity, unit, expiry_date, restock_date=None):
+    def add_item(self, drug_name, quantity, unit, user_id, expiry_date, restock_date=None,):
         """Add item to the inventory"""
         if isinstance(expiry_date, str):
             expiry_date = datetime.strptime(expiry_date, '%Y-%m-%d').date()  # Convert string to date
@@ -70,7 +72,8 @@ class HealthInventory(db.Model):
             quantity=quantity,
             unit=unit,
             expiry_date=expiry_date, 
-            restock_date=restock_date
+            restock_date=restock_date,
+            user_id=user_id
         )
         added_item = CRUD.create(new_item)
         if added_item is None:
@@ -79,23 +82,22 @@ class HealthInventory(db.Model):
 
     def view_inventory(self, search_term=None, page=1, per_page=10):
         """Search and filter inventory"""
-        items = CRUD.read(HealthInventory)
+        query = CRUD.read(HealthInventory)
         if search_term:
-            items = [item for item in items if search_term.lower() in item.drug_name.lower()]
-            paginated_items = items.limit(per_page).offset((page - 1) * per_page)
+            query = query.filter(HealthInventory.drug_name.ilike(f'%{search_term}%'))
+        paginated_items = query.limit(per_page).offset((page - 1) * per_page)
         return paginated_items.all()
-
-    def restock(self, item, quantity_to_add, restock_date=None):
+    
+    def restock(self, quantity_to_add, restock_date=None):
         """Restock Inventory"""
-        if item:
-            if quantity_to_add <= 0:
-                raise ValueError('Quantity to add must be a positive number')
-            # Increase quantity
-            item.quantity += quantity_to_add
-            # Update restock_date or set to current date
-            item.restock_date = restock_date or date.today()
-            CRUD.update(item)
-            print(f'{item.drug_name} restocked. New quantity: {item.quantity}, Restock date: {item.restock_date}.')
+        if quantity_to_add <= 0:
+            raise ValueError('Quantity to add must be a positive number')
+        # Increase quantity
+        self.quantity += quantity_to_add
+        # Update restock_date or set to current date
+        self.restock_date = restock_date or date.today()
+        db.session.commit()
+        return self
 
     def items_due_for_restock(self, restock_date=None):
         """

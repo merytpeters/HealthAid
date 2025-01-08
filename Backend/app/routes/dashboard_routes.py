@@ -2,8 +2,18 @@ import os
 from flask import Blueprint, request, jsonify, send_file
 from app.utils.crud import CRUD
 from app.models.dashboard import Dashboard, DashboardSchema, PersonalInformation, PhysicalAttributes, HealthMetrics
+from flask_jwt_extended import jwt_required, get_jwt_identity
+
 
 dashboard_bp = Blueprint('dashboard', __name__)
+
+
+@dashboard_bp.before_request
+@jwt_required()
+def protect_dashboard_routes():
+    current_user = get_jwt_identity()
+    if not current_user:
+        return jsonify({"error": "User not authenticated"}), 40
 
 @dashboard_bp.route('/dashboard', methods=['GET'])
 def get_dashboard():
