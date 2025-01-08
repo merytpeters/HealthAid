@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """User dashboard, concepts to look at : SQLALCHEMY relationships, marshmallow, matplotlib and matlib"""
+import os
+from marshmallow import fields
 from app.db import db
 from datetime import datetime, timezone
 import matplotlib.pyplot as plt
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
+import matplotlib
+matplotlib.use('Agg')
 
 
 class Dashboard(db.Model):
@@ -11,6 +15,7 @@ class Dashboard(db.Model):
     __tablename__ = 'dashboard'
 
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     personal_information_id = db.Column(db.Integer, db.ForeignKey('personal_information.id'))
     physical_attributes_id = db.Column(db.Integer, db.ForeignKey('physical_attributes.id'))
     health_metrics_id = db.Column(db.Integer, db.ForeignKey('health_metrics.id'))
@@ -92,11 +97,22 @@ class Dashboard(db.Model):
         heart_rate = []
         systolic_bp = []
         diastolic_bp = []
+
+        blood_sugar = self.health_metrics.blood_sugar or 0
+        heart_rate = self.health_metrics.heart_rate or 0
+        systolic_bp = self.health_metrics.systolic or 0
+        diastolic_bp = self.health_metrics.diastolic or 0
+
+        sizes = [blood_sugar, heart_rate, systolic_bp, diastolic_bp]
+        if all(size == 0 for size in sizes):
+            print('All metrics are zero, pie chart cannot be plotted.')
+            return []
         
         labels = ['Blood Sugar', 'Heart Rate', 'Systolic BP', 'Diastolic BP']
-        sizes = [blood_sugar[0], heart_rate[0], systolic_bp[0], diastolic_bp[0]]
         colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue']
         explode = (0.1, 0, 0, 0)  # explode 1st slice
+
+        piechart_path = os.path.join(os.getcwd(), 'health_metrics_piechart.png')
 
         plt.figure(figsize=(8, 8))
         plt.pie(sizes, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, startangle=140)
@@ -104,8 +120,7 @@ class Dashboard(db.Model):
         plt.title('Health Metrics Distribution')
         plt.savefig('health_metrics_piechart.png')
         plt.close()
-        print("Pie chart saved as health_metrics_piechart.png")
-        diastolic_bp = []
+        print(f"Pie chart saved as {piechart_path}")
     
 
 class PersonalInformation(db.Model):
@@ -113,8 +128,8 @@ class PersonalInformation(db.Model):
     __tablename__ = 'personal_information'
         
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
-    age = db.Column(db.Integer, nullable=False)
+    name = db.Column(db.String(50), nullable=False)
+    age = db.Column(db.Integer, nullable=True)
     
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
@@ -137,10 +152,10 @@ class PhysicalAttributes(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     weight = db.Column(db.Float, nullable=True, default=0.0)
-    weight_unit = db.Column(db.String, nullable=False, default="kg")
+    weight_unit = db.Column(db.String(25), nullable=False, default="kg")
     height = db.Column(db.Float, nullable=True, default=0.0)
-    height_unit = db.Column(db.String, nullable=False, default="ft")
-    gender = db.Column(db.String, nullable=True)
+    height_unit = db.Column(db.String(25), nullable=False, default="ft")
+    gender = db.Column(db.String(25), nullable=True)
     
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
@@ -180,14 +195,14 @@ class HealthMetrics(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     blood_sugar = db.Column(db.Float, nullable=True, default=0.0)
-    blood_sugar_unit = db.Column(db.String, nullable=False, default="mg/dL")
+    blood_sugar_unit = db.Column(db.String(50), nullable=False, default="mg/dL")
     systolic = db.Column(db.Integer, nullable=True, default=0)
     diastolic = db.Column(db.Integer, nullable=True, default=0) 
-    blood_pressure_unit = db.Column(db.String, nullable=False, default="mmHg")
+    blood_pressure_unit = db.Column(db.String(50), nullable=False, default="mmHg")
     heart_rate = db.Column(db.Integer, nullable=True, default=0)
-    heart_rate_unit = db.Column(db.String, nullable=False, default="bpm")
+    heart_rate_unit = db.Column(db.String(50), nullable=False, default="bpm")
     body_temperature = db.Column(db.Float, nullable=True, default=0.0)
-    body_temperature_unit = db.Column(db.String, nullable=False, default="C")
+    body_temperature_unit = db.Column(db.String(50), nullable=False, default="C")
     timestamp = db.Column(db.DateTime, default=datetime.now(tz=timezone.utc))
     
     def __init__(self, **kwargs):
@@ -227,13 +242,6 @@ class HealthMetrics(db.Model):
         }
 
 
-class DashboardSchema(SQLAlchemyAutoSchema):
-    class Meta:
-        model = Dashboard
-        include_relationships = True
-        load_instance = True
-
-
 class PersonalInformationSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = PersonalInformation
@@ -250,3 +258,13 @@ class HealthMetricsSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = HealthMetrics
         load_instance = True
+
+class DashboardSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Dashboard
+        include_relationships = True
+        load_instance = True
+
+    personal_information = fields.Nested(PersonalInformationSchema)
+    physical_attributes = fields.Nested(PhysicalAttributesSchema)
+    health_metrics = fields.Nested(HealthMetricsSchema)

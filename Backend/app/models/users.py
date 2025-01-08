@@ -9,7 +9,7 @@ class User(db.Model):
     last_name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     username = db.Column(db.String(100), unique=True, nullable=False)
-    password_hash = db.Column(db.String(128), nullable=False)
+    password_hash = db.Column(db.String(512), nullable=False)
     date_of_birth = db.Column(db.Date, nullable=True)
     gender = db.Column(db.String(10), nullable=False)
     weight = db.Column(db.Float, nullable=False)
