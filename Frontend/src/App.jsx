@@ -10,6 +10,8 @@ import { Signup } from "./Pages/Signup";
 import LandingPage from "./Pages/LandingPage";
 import Journal from "./Pages/Journal";
 import { SymptomsChecker } from "./Pages/SymptomsChecker";
+import { Inventory } from "./Pages/Inventory";
+import DynamicTables from "./Pages/dynaminx";
 import "./App.css";
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
         <Route path="/" element={<NavLayouts />}>
           <Route path="/journal" element={<Journal />} />
           <Route path="/symptoms" element={<SymptomsChecker />} />
+          <Route path="/test" element={<DynamicTables />} />
+          <Route path="/inventory" element={<Inventory />} />
         </Route>
       </>
     )
