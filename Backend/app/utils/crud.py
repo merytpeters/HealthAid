@@ -8,6 +8,7 @@ from sqlalchemy.exc import IntegrityError
 import openai
 import time
 from config import Config
+import logging
 
 # Ensure that OpenAI API key is loaded
 openai.api_key = Config.API_KEY
@@ -21,8 +22,13 @@ class CRUD:
         try:
             db.session.add(item)
             db.session.commit()
+            return item
         except IntegrityError as e:
             db.session.rollback()
+            raise Exception(f'Failed to create item: {e}')
+        except Exception as e:
+            db.session.rollback()
+            logging.error(f"General error while adding item: {e}")
             raise Exception(f'Failed to create item: {e}')
 
     @staticmethod
@@ -50,7 +56,7 @@ class CRUD:
                 column = getattr(model, key, None)
                 if column:
                     query = query.filter(column == value)
-        return query.all()
+        return query
 
     @staticmethod
     def update(item, **fields):
