@@ -128,19 +128,21 @@ def restock_notification():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@inventory_bp.route('/delete_item/<item_id>', methods=['DELETE'])
-def delete_item(item_id):
+@inventory_bp.route('/deleteitem', methods=['DELETE'])
+def delete_item():
     """Delete item route"""
     try:
         data = request.get_json()
-        item_name = data.get('drug_name') if data else None
-        item = HealthInventory.query.get(item_id)
-        if not item:
-            return jsonify({"error": "Item not found"}), 404
-        if item_name and item.drug_name != item_name:
-            return jsonify({"error": "Item name mismatch"}), 400
-        deleted_item = item.delete_item(item_id)
-        return jsonify({"message": f"Item {deleted_item} deleted successfully"}), 200
+        drug_name = data.get('drug_name')
+        if not drug_name:
+            return jsonify({"error": f"Invalid or missing drug name "}), 400
+        
+
+        item = HealthInventory.query.filter_by(drug_name=drug_name).first()
+        deleted_item = item.delete_item()
+        if deleted_item:
+            return jsonify({"message": f"{deleted_item} deleted successfully"}), 200
+        return jsonify({"error": "Item not found"}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -153,8 +155,8 @@ def delete_expired_items():
             return jsonify({"error": "Missing 'expired' parameter"}), 400
         
         inventory = HealthInventory()
-        deleted_items = inventory.delete_expired_items(expired=expired_param)
-        return jsonify({"message": f"{len(deleted_items)} expired items deleted"}), 200
+        deleted_items = inventory.delete_expired_items(expired_param)
+        return jsonify({"message": f"{ len(deleted_items) } has expired and has been deleted"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -163,7 +165,7 @@ def delete_inventory():
     """Delete all items in inventory"""
     try:
         inventory = HealthInventory()
-        deleted_items = inventory.delete_item()
+        deleted_items = inventory.delete_all_items()
         return jsonify({"message": "All items deleted", "count": len(deleted_items)}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
