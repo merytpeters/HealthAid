@@ -1,0 +1,49 @@
+.inventory {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+table {
+  border: 1px solid #f8c954;
+  /* border-bottom: 0px; */
+}
+thead {
+  /* border-bottom: 1px solid #f8c954; */
+}
+thead,
+tbody,
+input {
+  border: 0px;
+}
+
+input {
+  outline: none;
+  padding: 5px;
+  border-right: 1px solid #f8c954;
+  border-top: 1px solid #f8c954;
+  margin: 0px;
+}
+.actions {
+  /* padding: 2px; */
+  border-top: 1px solid #f8c954;
+}
+
+.actions img {
+  border: 0px;
+  background-color: white;
+  height: 25px;
+  margin-right: 10px;
+  cursor: pointer;
+
+}
+.new-stock {
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #f8c954;
+  border: 0px;
+  border-radius: 5px;
+  color: white;
+}
