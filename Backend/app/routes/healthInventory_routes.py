@@ -15,7 +15,7 @@ inventory_bp = Blueprint('inventory', __name__)
 def protect_inventory_routes():
     current_user = get_jwt_identity()
     if not current_user:
-        return jsonify({"error": "User not authenticated"}), 40
+        return jsonify({"error": "User not authenticated"}), 401
 
 @inventory_bp.route('/', methods=['GET'])
 def get_inventory():
