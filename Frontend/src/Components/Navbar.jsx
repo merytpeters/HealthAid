@@ -39,72 +39,73 @@ const Navbar = ({ isLandingPage = false }) => {
 
   return (
     <>
-    <div>
-{/* fixing the nav bar issue */}
-      <nav className="navbar" style={{width: "100%"}}>
-        <p
-          style={{
-            display: "inline-block",
-            margin: "20px 100px 20px 20px",
-            color: "#f8c954",
-          }}
-        >
-          <span style={{ display: "block" }}>
-            <Link to="/" style={{ textDecoration: "none", color: "#f8c954" }}>
-              HealthAid <br />
-              Personal Health Management
-            </Link>
-          </span>
-        </p>
-        <NavLink
-          to="/"
-          style={{ textDecoration: "none", color: "#f8c954" }}
-          className={({ isActive }) => (isActive ? "nav" : "nav-active")}
-        >
-          Home
-        </NavLink>
-        <NavLink
-          to="journal"
-          style={{ textDecoration: "none", color: "#f8c954" }}
-          className={({ isActive }) => (isActive ? "nav" : "nav-active")}
-        >
-          Journal
-        </NavLink>
-        <NavLink
-          to="inventory"
-          style={{ textDecoration: "none", color: "#f8c954" }}
-          className={({ isActive }) => (isActive ? "nav" : "nav-active")}
-        >
-          Inventory
-        </NavLink>
-        <NavLink
-          to="#"
-          className={({ isActive }) => (isActive ? "nav" : "nav-active")}
-        >
-          FirstAid
-        </NavLink>
-        <NavLink
-          to="symptoms"
-          style={{ textDecoration: "none", color: "#f8c954" }}
-          className={({ isActive }) => (isActive ? "nav" : "nav-active")}
-        >
-          Symptom Checker
-        </NavLink>
-        <NavLink
-          to="#"
-          className={({ isActive }) => (isActive ? "nav" : "nav-active")}
-        >
-          Drug Interaction Checker
-        </NavLink>
-        <NavLink
-          to="#"
-          className={({ isActive }) => (isActive ? "nav" : "nav-active")}
-        >
-          Pill Reminder
-        </NavLink>
-        <FaBell className="nav" />
-      </nav>
-    </div>
+      <div>
+        {/* fixing the nav bar issue */}
+        <nav className="navbar" style={{ width: "100%" }}>
+          <p
+            style={{
+              display: "inline-block",
+              margin: "20px 100px 20px 20px",
+              color: "#f8c954",
+            }}
+          >
+            <span style={{ display: "block" }}>
+              <Link to="/" style={{ textDecoration: "none", color: "#f8c954" }}>
+                HealthAid <br />
+                Personal Health Management
+              </Link>
+            </span>
+          </p>
+          <NavLink
+            to="/"
+            style={{ textDecoration: "none", color: "#f8c954" }}
+            className={({ isActive }) => (isActive ? "nav" : "nav-active")}
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="journal"
+            style={{ textDecoration: "none", color: "#f8c954" }}
+            className={({ isActive }) => (isActive ? "nav" : "nav-active")}
+          >
+            Journal
+          </NavLink>
+          <NavLink
+            to="inventory"
+            style={{ textDecoration: "none", color: "#f8c954" }}
+            className={({ isActive }) => (isActive ? "nav" : "nav-active")}
+          >
+            Inventory
+          </NavLink>
+          <NavLink
+            to="#"
+            className={({ isActive }) => (isActive ? "nav" : "nav-active")}
+          >
+            FirstAid
+          </NavLink>
+          <NavLink
+            to="symptoms"
+            style={{ textDecoration: "none", color: "#f8c954" }}
+            className={({ isActive }) => (isActive ? "nav" : "nav-active")}
+          >
+            Symptom Checker
+          </NavLink>
+          <NavLink
+            to="drug-int"
+            style={{ textDecoration: "none", color: "#f8c954" }}
+            className={({ isActive }) => (isActive ? "nav" : "nav-active")}
+          >
+            Drug Interaction Checker
+          </NavLink>
+          <NavLink
+            to="#"
+            className={({ isActive }) => (isActive ? "nav" : "nav-active")}
+          >
+            Pill Reminder
+          </NavLink>
+          <FaBell className="nav" />
+        </nav>
+      </div>
     </>
   );
 };

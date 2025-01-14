@@ -1,0 +1,10 @@
+.info {
+  /* height: 300px; */
+  width: 90%;
+  border: 1px solid #f8c954;
+  margin-top: 15px;
+  padding: 5px;
+}
+.info h2{
+    text-align: center;
+}

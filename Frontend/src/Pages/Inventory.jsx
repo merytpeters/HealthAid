@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../Styles/inventory.css";
 import check from "../assets/check.png";
-import del from "../assets/delete.png";
+import del from "../assets/delete_icon.png";
 
 export const Inventory = () => {
   const [rows, setRow] = useState([
