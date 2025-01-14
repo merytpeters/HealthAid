@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import search from "../assets/search.png";
-import "../Styles/Symptoms.css";
+import "../Styles/symptoms.css";
 
 export const DrugInteraction = () => {
   const [data, setData] = useState("");
