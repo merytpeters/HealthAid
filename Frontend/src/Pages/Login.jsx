@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { postRequest } from "../services/apis";
 
 import "../Styles/login.css";
 import pic from "../assets/exercise.jpg";
@@ -13,7 +14,7 @@ export const Login = () => {
     const { name, value } = e.target;
     setData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     if (data.email == "") {
       setEmailError("Email is needed");
@@ -26,6 +27,8 @@ export const Login = () => {
 
       return;
     }
+    const res = await postRequest(data, "login");
+    console.log(res);
     console.log(data);
   };
   return (

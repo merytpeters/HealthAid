@@ -11,6 +11,7 @@
     "server": "json-server --watch src/Data/fakedb.json --port 8000"
   },
   "dependencies": {
+    "axios": "^1.7.9",
     "chart.js": "^4.4.7",
     "chartjs-adapter-date-fns": "^3.0.0",
     "json-server": "^1.0.0-beta.3",

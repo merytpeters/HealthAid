@@ -1,9 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../Styles/inventory.css";
 import check from "../assets/check.png";
 import del from "../assets/delete_icon.png";
 
+import { getRequest } from "../services/apis";
+
 export const Inventory = () => {
+  const [res, setRes] = useState({ error: false, data: "" });
+
+  // get already saved inventory
+  useEffect(() => {
+    const getInventory = async () => {
+      const res = await getRequest("inventory");
+      setRes(res);
+    };
+
+    getInventory();
+  });
   const [rows, setRow] = useState([
     {
       drug_name: "",
