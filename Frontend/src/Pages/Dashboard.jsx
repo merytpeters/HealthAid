@@ -1,8 +1,6 @@
 import Chart from "chart.js/auto";
-// import {CategoryScale} from "chart.js";
 import {useState, useEffect} from "react";
-import {useLoaderData} from "react-router-dom"
-import { FaPen, FaPenSquare} from 'react-icons/fa';
+import { FaPenSquare} from 'react-icons/fa';
 import HeartBeat from "../assets/heartBeat.svg?react";
 import BloodSugar from "../assets/blood-Sugar.svg?react";
 import BloodPressure from "../assets/blood-Pressure.svg?react";
