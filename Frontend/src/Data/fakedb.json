@@ -53,10 +53,33 @@
   ],
   "inventory": [
     {
-      "id": "1"
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
     }
+
   ],
   "graphData": [
+    {
+      "name": "afuah",
+      "age": "53",
+      "weight": "34",
+      "height": "161",
+      "gender": "female",
+      "bloodSugar": 20,
+      "bloodPressure": {
+        "systolic": 25,
+        "diastolic": 90
+      },
+      "heartRate": 38,
+      "temp": 90,
+      "time": "2024-10-20T09:00:00",
+      "id": "6180"
+    },
     {
       "name": "afuah",
       "age": "53",
@@ -95,22 +118,6 @@
       "weight": "34",
       "height": "161",
       "gender": "female",
-      "bloodSugar": 20,
-      "bloodPressure": {
-        "systolic": 25,
-        "diastolic": 90
-      },
-      "heartRate": 38,
-      "temp": 90,
-      "time": "2024-10-20T09:00:00",
-      "id": "6180"
-    },
-    {
-      "name": "afuah",
-      "age": "53",
-      "weight": "34",
-      "height": "161",
-      "gender": "female",
       "bloodSugar": 15,
       "bloodPressure": {
         "systolic": 40,
@@ -136,6 +143,54 @@
       "temp": 50,
       "time": "2024-10-20T11:00:00",
       "id": "5e6a"
+    },
+    {
+      "id": "ba5a",
+      "name": "afuah",
+      "age": "53",
+      "weight": "200",
+      "height": "170",
+      "gender": "female",
+      "bloodSugar": 80,
+      "bloodPressure": {
+        "systolic": 102,
+        "diastolic": 72
+      },
+      "heartRate": 98,
+      "temp": 99,
+      "time": "2025-01-08T17:30:52.194Z"
+    },
+    {
+      "id": "d3e3",
+      "name": "afuah",
+      "age": "53",
+      "weight": "",
+      "height": "",
+      "gender": "female",
+      "bloodSugar": 80,
+      "bloodPressure": {
+        "systolic": 102,
+        "diastolic": 72
+      },
+      "heartRate": "30",
+      "temp": 99,
+      "time": "2025-01-15T18:08:57.401Z"
+    },
+    {
+      "id": "6dbe",
+      "name": "afuah",
+      "age": "53",
+      "weight": "200",
+      "height": "170",
+      "gender": "female",
+      "bloodSugar": 80,
+      "bloodPressure": {
+        "systolic": 102,
+        "diastolic": 72
+      },
+      "heartRate": 98,
+      "temp": 99,
+      "time": "2025-01-15T18:12:18.146Z"
     }
   ]
 }

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import {Chart as ChartJs}  from "chart.js/auto";
 import {Pie} from "react-chartjs-2";
 
-const PieChart = (selected = "bloodSugar") => {
+const PieChart = ({selected = "bloodSugar"}) => {
     const [graphData, setGraphData] = useState({
             labels: [],
             datasets: []
@@ -33,16 +33,23 @@ const PieChart = (selected = "bloodSugar") => {
     const filterGraphData = (fullGraphData) => {
         let high = 0, mid = 0, normal = 0;
         fullGraphData.map(item => {
-            if (item[selected] > 70) 
-                high++;
-            else if(item[selected] > 50 && item[selected] < 70) 
-                mid++;
-            else 
-                normal++;
-           
-            
+            if (selected === "bloodPressure") {
+                if (item[selected].systolic > 60) 
+                    high++;
+                else if(item[selected].systolic > 50 && item[selected] < 70) 
+                    mid++;
+                else 
+                    normal++;
+            }else {
+                if (item[selected] > 10) 
+                    high++;
+                else if(item[selected] > 50 && item[selected] < 70) 
+                    mid++;
+                else 
+                    normal++;
+            }  
         });
-        console.log(normal)
+
 
         setGraphData(
             {
@@ -64,7 +71,7 @@ const PieChart = (selected = "bloodSugar") => {
         plugins: {
             title: {
                 display: true,
-                text: "Degree of Rate"
+                text: selected
             },
             tooltip: {
                 enabled: false 

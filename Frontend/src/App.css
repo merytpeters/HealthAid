@@ -151,6 +151,30 @@ input[type="submit"]{
   background-color: #ffffff;
 }
 
+.data-card {
+  margin: 0 20px; 
+  border-radius: 20px;
+  font-size: 24px; 
+  width : 250px;
+  height: 200px;
+  border: 2px solid #f8c954;
+  color: #000000;
+  text-align: center;
+  padding: 15px;
+}
+.data-card-active {
+  border: 3px solid #f8c954;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 24px; 
+  color: #000000;
+  margin: 0 20px;
+  padding: 15px;
+  width : 250px;
+  height: 200px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3)
+}
+
 
 
 

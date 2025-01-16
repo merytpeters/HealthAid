@@ -16,39 +16,68 @@ const Dashboard = () => {
     const [showInput, setShowInput]  = useState(false);
     const [beatValue, setBeatValue] = useState(98);
     const [sugarValue, setSugarValue] = useState(80);
-    const [pressureValueTop , setPressureValueTop] = useState(102);
-    const [pressureValueBottom , setPressureValueBottom] = useState(72);
+    const [systolic , setSystolic] = useState(102);
+    const [diastolic , setDiastolic] = useState(72);
     const [tempValue, setTempValue] = useState(99);
-    const [name, setName] = useState("afuah");
+    const [name, setName] = useState();
     const [age, setAge] = useState("53");
     const [weight, setWeight] = useState("");
     const [height, setHeight]= useState("");
+    const [cardSelected, setCardSelected] = useState("bloodSugar")
+    const [isActive, setIsActive] = useState();
 
     const clickEdit = () => setShowInput(true);
 
     useEffect(() => {
         const dataloader = async () => {
-            const res = await fetch('api/graphData')
-            const data = await res.json()
+            const res = await fetch('api/graphData?_sort=-time&_limit=1')
+            const data = await res.json();
+            defaultData(data);
         }
-    }, [beatValue, sugarValue,pressureValueBottom,pressureValueTop,tempValue,name,age,weight,height]);
+        dataloader();
+    }, []);
 
-    const saveInput = () => {
+
+    const saveInput = async () => {
+        const date = new Date();
         const newInput = {
-            "name": "afuah",
-            "age": "53",
-            "weight": "34",
-            "height": "161",
+            "name": name,
+            "age": age,
+            "weight": weight,
+            "height": height,
             "gender": "female",
-            "bloodSugar": 12,
+            "bloodSugar": sugarValue,
             "bloodPressure": {
-              "systolic": 8,
-              "diastolic": 72
+              "systolic": systolic,
+              "diastolic": diastolic
             },
-            "heartRate": 0,
-            "temp": 60,
-            "time": "2024-10-20T06:00:00",
+            "heartRate": beatValue,
+            "temp": tempValue,
+            "time": date,
         }
+
+        const res = await fetch('/api/graphData', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newInput)
+        });
+        return
+    }
+
+    const defaultData = (data) => {
+        const obj = data[0];
+
+        setName(obj.name);
+        setAge(obj.age);
+        setWeight(obj.weight);
+        setHeight(obj.height);
+        setBeatValue(obj.heartRate);
+        setSugarValue(obj.bloodSugar);
+        setSystolic(obj.bloodPressure.systolic);
+        setDiastolic(obj.bloodPressure.diastolic);
+        setTempValue(obj.temp);
     }
     
 
@@ -58,7 +87,7 @@ const Dashboard = () => {
             showInput ?          
         <div className="dashboard">
             <div style={{display: "flex", justifyContent: "flex-end", margin: "0px", marginRight: "85px", }}>
-                <form onSubmit={() => {}} >
+                <form onSubmit={saveInput} >
                         <label htmlFor="heartbeatSubmit"></label>
                         <input type="submit" className= "dashboard-input" id="heartbeatSubmit" value="Save" style={{marginTop: "0"}}/>
                 </form>
@@ -94,7 +123,7 @@ const Dashboard = () => {
                         <HeartBeat />
                         <p>Heart Rate</p>
                     </div>
-                    <form onSubmit={() => {}} >
+                    <form>
                         <div style={{display: 'flex', flexDirection: "row", alignItems: 'center'}}>
                             <input type="text" className= "dashboard-input" id="heartbeatInput" value={beatValue} onChange={(event) => setBeatValue(event.target.value)}/>
                             <label htmlFor="heartbeatInput">bpm</label>
@@ -106,7 +135,7 @@ const Dashboard = () => {
                         <BloodSugar />
                         <p>Blood Sugar</p>
                     </div>
-                    <form onSubmit={() => {}}>
+                    <form>
                         <div style={{display: 'flex', flexDirection: "row", alignItems: 'center'}}>
                             <input type="text" className= "dashboard-input" id="bloodSugarInput" value={sugarValue} onChange={(event) => setSugarValue(event.target.value)}/>
                             <label htmlFor="bloodSugarInput">mg / dl</label>
@@ -118,11 +147,11 @@ const Dashboard = () => {
                         <BloodPressure />
                         <p>Blood Pressure</p>
                     </div>
-                    <form onSubmit={() => {}} >
+                    <form>
                         <div style={{display: 'flex', flexDirection: "row", alignItems: 'center'}}> 
-                            <input type="text" className= "dashboard-input" id="pressureInputTop" value={pressureValueTop} onChange={(event) => setPressureValueTop(event.target.value)}/>
+                            <input type="text" className= "dashboard-input" id="pressureInputTop" value={systolic} onChange={(event) => setSystolic(event.target.value)}/>
                             /
-                            <input type="text" className= "dashboard-input" id="pressureInputBottom" value={pressureValueBottom} onChange={(event) => setPressureValueBottom(event.target.value)}/>
+                            <input type="text" className= "dashboard-input" id="pressureInputBottom" value={diastolic} onChange={(event) => setDiastolic(event.target.value)}/>
                             <label htmlFor="pressureInputTop">mmhg</label>
                             <label htmlFor="pressureInputBottom"></label>
                         </div>
@@ -133,7 +162,7 @@ const Dashboard = () => {
                         <Temp />
                         <p>Temperature</p>
                     </div>
-                    <form onSubmit={() => {}}>
+                    <form>
                         <div style={{display: 'flex', flexDirection: "row", alignItems: 'center'}}>
                             <input type="text" className= "dashboard-input" id="tempInput" value={tempValue} onChange={(event) => setTempValue(event.target.value)}/>
                             <label htmlFor="tempInput"><sup>o</sup>C</label>
@@ -148,7 +177,17 @@ const Dashboard = () => {
             <div style={{display: "flex", justifyContent: "flex-end", }}>
                 <FaPenSquare size={40} style={{fill: "#f8c954", marginRight: "85px"}} onClick={clickEdit}/>
             </div>
-            <Card newStyle={{margin: "0 50px", marginBottom: "30px",display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-evenly",fontSize: "20px"}}>
+            <Card 
+            newStyle={{
+                margin: "0 50px", 
+                marginBottom: "30px",
+                display: "flex", 
+                flexDirection: "row", 
+                alignItems: "center", 
+                justifyContent: "space-evenly",
+                fontSize: "20px"
+            }}
+            >
                 <div style={{display: "flex", flexDirection: "column", margin: "0px 60px"}}>
                         <p>Name: {name}</p>
                         <p>Age: {age} yrs</p>
@@ -159,7 +198,13 @@ const Dashboard = () => {
                 </div>
             </Card>
             <div className="dashboard-cards">
-                <Card newStyle={{margin: "0 20px", borderRadius: "20px", fontSize: "24px", width : "250px", height: "200px"}}>
+                <Card 
+                    func={() => {
+                        setCardSelected("heartRate");
+                        setIsActive(0);
+                    }}
+                    className={isActive === 0 || cardSelected === "heartRate" ? "data-card-active" : "data-card"}
+                >
                     <div className="card-header" >
                         <HeartBeat />
                         <p>Heart Rate</p>
@@ -169,7 +214,13 @@ const Dashboard = () => {
                         <div style={{backgroundColor: "#56aeff"}}>Normal</div>
                     </div>
                 </Card>
-                <Card newStyle={{margin: " 0 20px", borderRadius: "20px", fontSize: "24px", width : "250px", height: "200px"}}>
+                <Card 
+                    func={() => {
+                        setCardSelected("bloodSugar");
+                        setIsActive(1);
+                    }}
+                    className={isActive === 1 || cardSelected === "bloodSugar" ? "data-card-active" : "data-card"}
+                >
                     <div className="card-header">
                         <BloodSugar />
                         <p>Blood Sugar</p>
@@ -179,30 +230,42 @@ const Dashboard = () => {
                         <div style={{backgroundColor: "#6ce5e8"}}>Normal</div>
                     </div>
                 </Card>
-                <Card newStyle={{margin: " 0 20px", borderRadius: "20px", fontSize: "24px", width : "250px", height: "200px"}}>
+                <Card
+                    func={() => {
+                        setCardSelected("bloodPressure");
+                        setIsActive(2);
+                    }}
+                    className={isActive === 2 || cardSelected ===  "bloodPressure" ? "data-card-active" : "data-card"}
+                >
                     <div className="card-header">
                         <BloodPressure />
                         <p>Blood Pressure</p>
                     </div>
                     <div className="card-value">
-                        <p><span>{pressureValueTop} / {pressureValueBottom} </span> mmhg</p>
+                        <p><span>{systolic} / {diastolic} </span> mmhg</p>
                         <div style={{backgroundColor: "#41b8d5"}}>Normal</div>
                     </div>
                 </Card>
-                <Card newStyle={{margin: "0 20px", borderRadius: "20px", fontSize: "24px", width : "250px", height: "200px"}}>
+                <Card
+                    func={() => {
+                        setCardSelected("temp");
+                        setIsActive(3);
+                    }}
+                    className={isActive === 3 || cardSelected === "temp" ? "data-card-active" : "data-card"}
+                >
                     <div className="card-header">
                         <Temp />
                         <p>Temperature</p>
                     </div>
                     <div className="card-value">
-                        <p>90 <sup>o</sup> C</p>
+                        <p>{tempValue} <sup>o</sup> C</p>
                         <div style={{backgroundColor: "#c6e0f9"}}>Normal</div>
                     </div>
                 </Card>
             </div>
             <div style={{display: "flex", flexDirection: "row"}}>
                 <LineChart />
-                <PieChart />
+                <PieChart selected={cardSelected}/>
             </div>
             
         </div>
