@@ -12,17 +12,18 @@ import Card from '../Components/Card'
 
 const Dashboard = () => {
     const [showInput, setShowInput]  = useState(false);
-    const [beatValue, setBeatValue] = useState(98);
-    const [sugarValue, setSugarValue] = useState(80);
-    const [systolic , setSystolic] = useState(102);
-    const [diastolic , setDiastolic] = useState(72);
-    const [tempValue, setTempValue] = useState(99);
+    const [beatValue, setBeatValue] = useState();
+    const [sugarValue, setSugarValue] = useState();
+    const [systolic , setSystolic] = useState();
+    const [diastolic , setDiastolic] = useState();
+    const [tempValue, setTempValue] = useState();
     const [name, setName] = useState();
-    const [age, setAge] = useState("53");
-    const [weight, setWeight] = useState("");
-    const [height, setHeight]= useState("");
+    const [age, setAge] = useState();
+    const [weight, setWeight] = useState();
+    const [height, setHeight]= useState();
     const [cardSelected, setCardSelected] = useState("bloodSugar")
     const [isActive, setIsActive] = useState();
+    const [data, setData] = useState();
 
     const clickEdit = () => setShowInput(true);
 
@@ -31,6 +32,8 @@ const Dashboard = () => {
             const res = await fetch('api/graphData?_sort=-time&_limit=1')
             const data = await res.json();
             defaultData(data);
+            console.log("data here is ",data)
+            setData(data)
         }
         dataloader();
     }, []);
@@ -209,7 +212,7 @@ const Dashboard = () => {
                     </div>
                     <div className="card-value">
                         <p> {beatValue} bpm</p>
-                        <div style={{backgroundColor: "#56aeff"}}>Normal</div>
+                        <div style={{backgroundColor: "#56aeff"}}>{beatValue < 70 ? 'Normal': "High"}</div>
                     </div>
                 </Card>
                 <Card 
@@ -225,7 +228,7 @@ const Dashboard = () => {
                     </div>
                     <div className="card-value">
                         <p>{sugarValue} mg / dl</p>
-                        <div style={{backgroundColor: "#6ce5e8"}}>Normal</div>
+                        <div style={{backgroundColor: "#6ce5e8"}}>{sugarValue < 70 ? "Normal" : "High"}</div>
                     </div>
                 </Card>
                 <Card
@@ -241,7 +244,7 @@ const Dashboard = () => {
                     </div>
                     <div className="card-value">
                         <p><span>{systolic} / {diastolic} </span> mmhg</p>
-                        <div style={{backgroundColor: "#41b8d5"}}>Normal</div>
+                        <div style={{backgroundColor: "#41b8d5"}}>{systolic < 70? "Normal": "High"}</div>
                     </div>
                 </Card>
                 <Card
@@ -257,13 +260,13 @@ const Dashboard = () => {
                     </div>
                     <div className="card-value">
                         <p>{tempValue} <sup>o</sup> C</p>
-                        <div style={{backgroundColor: "#c6e0f9"}}>Normal</div>
+                        <div style={{backgroundColor: "#c6e0f9"}}>{tempValue <= 70 ? "Normal" : "High"}</div>
                     </div>
                 </Card>
             </div>
             <div style={{display: "flex", flexDirection: "row"}}>
                 <LineChart />
-                <PieChart selected={cardSelected}/>
+                <PieChart selected={cardSelected} data={data}/>
             </div>
             
         </div>

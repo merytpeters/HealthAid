@@ -53,15 +53,14 @@
   ],
   "inventory": [
     {
-      "id": 1
+      "id": "1"
     },
     {
-      "id": 3
+      "id": "3"
     },
     {
-      "id": 2
+      "id": "2"
     }
-
   ],
   "graphData": [
     {
@@ -86,13 +85,13 @@
       "weight": "34",
       "height": "161",
       "gender": "female",
-      "bloodSugar": 12,
+      "bloodSugar": 50,
       "bloodPressure": {
         "systolic": 8,
         "diastolic": 72
       },
       "heartRate": 0,
-      "temp": 60,
+      "temp": 90,
       "time": "2024-10-20T06:00:00",
       "id": "9913"
     },
@@ -102,13 +101,13 @@
       "weight": "34",
       "height": "161",
       "gender": "female",
-      "bloodSugar": 4,
+      "bloodSugar": 60,
       "bloodPressure": {
         "systolic": 30,
         "diastolic": 60
       },
       "heartRate": 12,
-      "temp": 36,
+      "temp": 90,
       "time": "2024-10-20T08:00:00",
       "id": "f977"
     },
@@ -124,7 +123,7 @@
         "diastolic": 52
       },
       "heartRate": 30,
-      "temp": 50,
+      "temp": 90,
       "time": "2024-10-20T10:00:00",
       "id": "7603"
     },
@@ -140,7 +139,7 @@
         "diastolic": 52
       },
       "heartRate": 32,
-      "temp": 50,
+      "temp": 90,
       "time": "2024-10-20T11:00:00",
       "id": "5e6a"
     },
@@ -191,6 +190,22 @@
       "heartRate": 98,
       "temp": 99,
       "time": "2025-01-15T18:12:18.146Z"
+    },
+    {
+      "id": "ae88",
+      "name": "afuah",
+      "age": "53",
+      "weight": "200",
+      "height": "170",
+      "gender": "female",
+      "bloodSugar": "150",
+      "bloodPressure": {
+        "systolic": "150",
+        "diastolic": "120"
+      },
+      "heartRate": "200",
+      "temp": 90,
+      "time": "2025-01-16T15:46:59.282Z"
     }
   ]
 }
