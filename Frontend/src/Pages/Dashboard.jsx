@@ -32,7 +32,6 @@ const Dashboard = () => {
             const res = await fetch('api/graphData?_sort=-time&_limit=1')
             const data = await res.json();
             defaultData(data);
-            console.log("data here is ",data)
             setData(data)
         }
         dataloader();
@@ -87,13 +86,7 @@ const Dashboard = () => {
         {
             showInput ?          
         <div className="dashboard">
-            <div style={{display: "flex", justifyContent: "flex-end", margin: "0px", marginRight: "85px", }}>
-                <form onSubmit={saveInput} >
-                        <label htmlFor="heartbeatSubmit"></label>
-                        <input type="submit" className= "dashboard-input" id="heartbeatSubmit" value="Save" style={{marginTop: "0"}}/>
-                </form>
-            </div>
-            <Card newStyle={{display: "flex", margin: "0 50px", marginBottom: "30px"}}>
+            <Card newStyle={{display: "flex", margin: "30px 50px",}}>
                 <div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <p>Name</p>
@@ -170,6 +163,14 @@ const Dashboard = () => {
                         </div>
                     </form>
                 </Card>
+            </div>
+            <div >
+                <form onSubmit={saveInput} style={{display: "flex", justifyContent: "center" }}>
+                        <label htmlFor="dashboardSubmit"></label>
+                        <input type="submit" className= "dashboard-input" id="dashboardSubmit" value="Save" style={{margin: "30px", marginRight: "50px"}}/>
+                        <label htmlFor="dashboardCancel"></label>
+                        <input type="button" className= "dashboard-input" id="dashboardCancel" value="Cancel" style={{margin: "30px", marginLeft: "50px"}} onClick={() => setShowInput(false)}/>
+                </form>
             </div>
 
         </div>

@@ -16,26 +16,17 @@ const PieChart = ({selected = "bloodSugar"}) => {
                     const res = await fetch('http://localhost:8000/graphData');
                     const allGraphData = await res.json();
                     filterGraphData(allGraphData);
-                    console.log("fetching data here")
                 } catch(error) {
                     console.log("Error fetching data", error)
                 }
                 
             }
             dashboardDataLoader();
-    
-            // return () => {
-            //     // Cleanup all Chart.js instances on unmount
-            //     Object.keys(ChartJs.instances).forEach((key) => {
-            //       ChartJs.instances[key].destroy();
-            //     });
-            //   };
     }, [selected]);
 
     const filterGraphData = (fullGraphData) => {
         let high = 0, mid = 0, normal = 0;
         fullGraphData.map(item => {
-            console.log(item)
             if (selected === "bloodPressure") {
                 if (item[selected].systolic > 70) 
                     high++;
@@ -52,8 +43,6 @@ const PieChart = ({selected = "bloodSugar"}) => {
                     normal++;
             }  
         });
-
-        console.log([normal, mid,high])
         setGraphData(
             {
                 labels: ["normal", "medium","high"],

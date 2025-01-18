@@ -140,8 +140,8 @@ const Journal = () => {
             </section>
             : 
             <section >
-                <div style={{display: "flex", justifyContent: "flex-end"}}>
-                    <FaPlusCircle size={50} style={{padding: "10px", fill: "#f8c954", marginRight: "85px" }} onClick={() => setShowInput(true)} id="fa-plus-circle"/>
+                <div className="add-sign">
+                    <FaPlusCircle size={50} style={{fill: "#f8c954",}} onClick={() => setShowInput(true)} id="fa-plus-circle"/>
                 </div>
                 <div className="symptom-list">
                     {getData.map((symptomCard, idx) => 

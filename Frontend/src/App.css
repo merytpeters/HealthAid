@@ -141,11 +141,17 @@ img {
   padding: 5px;
   border: 2px solid #f8c954;
 }
-input[type="text"] {
+input[type="text"].dashboard-input {
   width: 50%;
   text-align: center;
 }
-input[type="submit"]{
+input[type="submit"].dashboard-input{
+  border-radius: 10px;
+  padding: 5px 15px;
+  background-color: #ffffff;
+}
+
+input[type="button"].dashboard-input{
   border-radius: 10px;
   padding: 5px 15px;
   background-color: #ffffff;
@@ -173,6 +179,25 @@ input[type="submit"]{
   width : 250px;
   height: 200px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3)
+}
+
+.pill-card{
+  border: 2px solid #f8c954;
+  border-radius: 10px;
+  width: 40%;
+  margin: 20px;
+}
+.add-sign {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  margin-right: 85px;
+  
+}
+.reminder-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 
