@@ -203,6 +203,7 @@ input[type="button"].dashboard-input{
 }
 .reminder-text {
   font-size: 14px;
+  text-align: center;
 }
 .pill-card > input[type = "checkbox"]:checked {
   accent-color: green;
@@ -213,8 +214,27 @@ input[type="button"].dashboard-input{
   margin: 20px;
   width: 20px;
 }
-
-
+.reminder-form {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  margin: 150px;
+}
+.reminder-input {
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  font-size: 20px;
+  border: 2px solid #f8c954;
+  width: 50%;
+  outline: none;
+  margin: 15px;
+}
+.reminder-button {
+  display: flex;
+  justify-content: center;
+}
 
 
   

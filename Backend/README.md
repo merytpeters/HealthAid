@@ -43,3 +43,11 @@ This is the backend directory of the HealthAid repository
     ```
 
 8. Access the application in your browser at `http://127.0.0.1:5000`
+
+9. SymptomChecker API setup:
+    - Create an account with APIMEDIC.
+    - Add the API key to your `.env` file:
+      ```bash
+      APIMEDIC_API_KEY=your_api_key
+      SYMPTOM_CHECKER_SECRET_KEY=your_secret_key
+      ```

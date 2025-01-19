@@ -13,7 +13,7 @@ dashboard_bp = Blueprint('dashboard', __name__)
 def protect_dashboard_routes():
     current_user = get_jwt_identity()
     if not current_user:
-        return jsonify({"error": "User not authenticated"}), 40
+        return jsonify({"error": "User not authenticated"}), 401
 
 @dashboard_bp.route('/dashboard', methods=['GET'])
 def get_dashboard():

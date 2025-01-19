@@ -48,44 +48,51 @@ const Navbar = ({ isLandingPage = false }) => {
           </span>
         </p>
         <NavLink
-          to="/"
-          className={({ isActive }) => (isActive ? "nav" : "nav-active")}
+          to="/dashboard"
+          end
+          className={({ isActive }) => (isActive ? "nav-active" : "nav")}
         >
           Home
         </NavLink>
         <NavLink
-          to="/"
-          className={({ isActive }) => (isActive ? "nav" : "nav-active")}
+          to="/journal"
+          end
+          className={({ isActive }) => (isActive ? "nav-active" : "nav")}
         >
           Journal
         </NavLink>
         <NavLink
-          to="#"
-          className={({ isActive }) => (isActive ? "nav" : "nav-active")}
+          to="/inventory"
+          end
+          className={({ isActive }) => (isActive ? "nav-active" : "nav")}
         >
           Inventory
         </NavLink>
         <NavLink
           to="#"
+          end
           className={({ isActive }) => (isActive ? "nav" : "nav-active")}
         >
           FirstAid
         </NavLink>
         <NavLink
-          to="#"
-          className={({ isActive }) => (isActive ? "nav" : "nav-active")}
+          to="/symptoms"
+          end
+          className={({ isActive }) => (isActive ? "nav-active" : "nav")}
         >
           Symptom Checker
         </NavLink>
         <NavLink
           to="#"
+          end
           className={({ isActive }) => (isActive ? "nav" : "nav-active")}
         >
           Drug Interaction Checker
         </NavLink>
         <NavLink
-          to="#"
-          className={({ isActive }) => (isActive ? "nav" : "nav-active")}
+          to="/pillReminder"
+          end
+          className={({ isActive }) => (isActive ? "nav-active" : "nav")}
         >
           Pill Reminder
         </NavLink>

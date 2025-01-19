@@ -19,7 +19,7 @@ class Config:
     # API Key for OpenAI
     API_KEY = os.getenv('API_KEY')
     # API Key for APIMedic for synptom checker
-    APIMEDIC_API_KEY = os.getenv('APIMEDIC_API_KEY')
+    # APIMEDIC_API_KEY = os.getenv('APIMEDIC_API_KEY')
     # SYMPTOM_CHECKER_SECRET_KEY = os.getenv('SYMPTOM_CHECKER_SECRET_KEY')
     # API Key for OpenFDA
     DRUG_API_KEY = os.getenv('DRUG_API_KEY')

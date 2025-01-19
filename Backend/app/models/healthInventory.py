@@ -108,37 +108,20 @@ class HealthInventory(db.Model):
         restock_date = restock_date or date.today()
         items_due = CRUD.read(model=HealthInventory, restock_date__lte=restock_date)
         return items_due
+    
+    def delete_item(self):
+        db.session.delete(self)
+        db.session.commit()
+        return self.drug_name
 
-    def delete_item(self, item=None):
-        """Delete item from inventory"""
-        if item:
-            # Delete specific items
-            while True:
-                # warning message to user
-                confirm = input(f'Are you sure you want to delete {item.drug_name} from inventory? (y/n): ')
-                if confirm.lower() == 'y':
-                    CRUD.delete(item)
-                    print(f'{item.drug_name} has been deleted from inventory!')
-                    return item
-                elif confirm.lower() == 'n':
-                    print(f'{item.drug_name} deletion has been canceled')
-                    break
-                else:
-                    print("Invalid input, please enter 'y' or 'n'.")
-        else:
-            # Delete all items
-            while True:
-                confirm = input('Are you sure you want to delete all items from the inventory? (y/n): ')
-                if confirm.lower() == 'y':
-                    items = CRUD.read(HealthInventory)
-                    for item in items:
-                        CRUD.delete(item)
-                    print(f'All items have been deleted from the inventory')
-                elif confirm.lower() == 'n':
-                    print(f'All item deletion has been canceled')
-                    break
-                else:
-                    print("Invalid input, please enter 'y' or 'n'.")
+    @staticmethod
+    def delete_all_items():
+        """Delete all items from inventory"""
+        # Get all items from the inventory
+        items = CRUD.read(HealthInventory)
+        for item in items:
+            CRUD.delete(item)
+        return "All items have been deleted from the inventory"
 
     def delete_expired_items(self, expired_date=None):
         """Deletes expired items from the inventory."""
@@ -149,8 +132,5 @@ class HealthInventory(db.Model):
         )
         deleted_items = []
         for item in expired_items:
-            deleted = self.delete_item(item=item)
-            deleted_items.append(deleted)
-        
+            deleted_items.append(CRUD.delete(item))
         return deleted_items
-
