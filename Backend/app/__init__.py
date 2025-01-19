@@ -25,7 +25,7 @@ from app.routes.pillReminder_routes import pill_reminder_bp
 from app.routes.first_aid_guide_routes import first_aid_bp
 from app.routes.medicalJournal_routes import medical_journal_bp
 from app.routes.dashboard_routes import dashboard_bp
-#from app.routes.symptomChecker_routes import symptom_checker_bp
+from app.routes.symptomChecker_routes import symptom_checker_bp
 from app.routes.drug_interaction_checker_routes import drug_interaction_checker_bp
 
 # Initialize extensions
@@ -53,7 +53,7 @@ def create_app():
     app.register_blueprint(first_aid_bp, url_prefix='/first_aid')
     app.register_blueprint(medical_journal_bp, url_prefix='/medical_journal')
     app.register_blueprint(dashboard_bp, url_prefix='/dashboard')
-    #app.register_blueprint(symptom_checker_bp, url_prefix='/symptom_checker')
+    app.register_blueprint(symptom_checker_bp, url_prefix='/symptom_checker')
     app.register_blueprint(drug_interaction_checker_bp, url_prefix='/drug_interaction_checker')
 
     return app
