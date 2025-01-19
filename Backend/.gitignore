@@ -1,3 +1,12 @@
-Enter your password:
 .env
 venv
+__pycache__
+.pyc
+migrations
+.mypy_cache
+.pytest_cache
+healthaid.db
+health_aid.db
+inspect.py
+secret_key_generator.py
+tests
