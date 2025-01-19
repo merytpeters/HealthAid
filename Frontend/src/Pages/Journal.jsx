@@ -15,7 +15,6 @@ const Journal = () => {
             try {
                 const res = await fetch('/api/medical_journal/get_symptoms');
                 const allSymptoms = await res.json();
-                console.log("this is all symptoms ", allSymptoms)
                 setGetData(allSymptoms)
             } catch (error) {
                 console.log('Error fetching data', error)
@@ -27,6 +26,7 @@ const Journal = () => {
 
 
     const saveButtonClick = async (event) => {
+        event.preventDefault()
         const today = new Date();
         const formattedDate = today.toISOString().split('T')[0];
 
@@ -36,13 +36,17 @@ const Journal = () => {
             "symptoms" : addsymptom,
             "timestamp" : formattedDate
         }
-        const res = await fetch('/api/medical_journal/add_symptom', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newSymptom),
-          });
+        try {
+            const res = await fetch('/api/medical_journal/add_symptom', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newSymptom),
+              });
+        } catch (error) {
+            console.log("Error posting data", error)
+        }
         return;
     }
 
@@ -140,8 +144,8 @@ const Journal = () => {
             </section>
             : 
             <section >
-                <div style={{display: "flex", justifyContent: "flex-end"}}>
-                    <FaPlusCircle size={50} style={{padding: "10px", fill: "#f8c954", marginRight: "85px" }} onClick={() => setShowInput(true)} id="fa-plus-circle"/>
+                <div className="add-sign">
+                    <FaPlusCircle size={50} style={{fill: "#f8c954",}} onClick={() => setShowInput(true)} id="fa-plus-circle"/>
                 </div>
                 <div className="symptom-list">
                     {getData.map((symptomCard, idx) => 

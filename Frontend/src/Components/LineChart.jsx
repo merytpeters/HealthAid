@@ -49,7 +49,6 @@ const LineChart =  () => {
             systolic.push({x: item.time, y: item.bloodPressure.systolic});
             diastolic.push({x: item.time, y: item.bloodPressure.diastolic});
         });
-        console.log(heartRate)
 
         setGraphData(
             {

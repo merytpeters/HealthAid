@@ -39,89 +39,198 @@
       "id": "0769",
       "description": "Watery diarrhea, Vomiting, Leg cramps, Restlessness or irritability, Dehydration",
       "date": "2024-12-29"
+    },
+    {
+      "id": "b2f9",
+      "symptoms": "malaria,fever,others",
+      "timestamp": "2025-01-08"
+    },
+    {
+      "id": "af68",
+      "symptoms": "malaria,fever,others",
+      "timestamp": "2025-01-08"
     }
   ],
   "inventory": [
     {
-      "id": "1",
-      "drugnaame": "para"
+      "id": "1"
+    },
+    {
+      "id": "3"
+    },
+    {
+      "id": "2"
     }
   ],
   "graphData": [
     {
-      "name" : "afuah",
-      "age" : "53", 
-      "weight" : "34",
-      "height" : "161",
-      "gender" : "female",
-      "bloodSugar" : 12,
-      "bloodPressure" : {
-          "systolic": 8,
-          "diastolic": 72
+      "name": "afuah",
+      "age": "53",
+      "weight": "34",
+      "height": "161",
+      "gender": "female",
+      "bloodSugar": 20,
+      "bloodPressure": {
+        "systolic": 25,
+        "diastolic": 90
       },
-      "heartRate" : 0,
-      "temp" : 60,
-      "time" : "2024-10-20T06:00:00"
+      "heartRate": 38,
+      "temp": 90,
+      "time": "2024-10-20T09:00:00",
+      "id": "6180"
     },
     {
-      "name" : "afuah",
-      "age" : "53", 
-      "weight" : "34",
-      "height" : "161",
-      "gender" : "female",
-      "bloodSugar" : 4,
-      "bloodPressure" : {
-          "systolic": 30,
-          "diastolic": 60
+      "name": "afuah",
+      "age": "53",
+      "weight": "34",
+      "height": "161",
+      "gender": "female",
+      "bloodSugar": 50,
+      "bloodPressure": {
+        "systolic": 8,
+        "diastolic": 72
       },
-      "heartRate" : 12,
-      "temp" : 36,
-      "time" : "2024-10-20T08:00:00"
+      "heartRate": 0,
+      "temp": 90,
+      "time": "2024-10-20T06:00:00",
+      "id": "9913"
     },
     {
-      "name" : "afuah",
-      "age" : "53", 
-      "weight" : "34",
-      "height" : "161",
-      "gender" : "female",
-      "bloodSugar" : 20,
-      "bloodPressure" : {
-          "systolic": 25,
-          "diastolic": 90
+      "name": "afuah",
+      "age": "53",
+      "weight": "34",
+      "height": "161",
+      "gender": "female",
+      "bloodSugar": 60,
+      "bloodPressure": {
+        "systolic": 30,
+        "diastolic": 60
       },
-      "heartRate" : 38,
-      "temp" : 90,
-      "time" : "2024-10-20T09:00:00"
+      "heartRate": 12,
+      "temp": 90,
+      "time": "2024-10-20T08:00:00",
+      "id": "f977"
     },
     {
-      "name" : "afuah",
-      "age" : "53", 
-      "weight" : "34",
-      "height" : "161",
-      "gender" : "female",
-      "bloodSugar" : 15,
-      "bloodPressure" : {
-          "systolic": 40,
-          "diastolic": 52
+      "name": "afuah",
+      "age": "53",
+      "weight": "34",
+      "height": "161",
+      "gender": "female",
+      "bloodSugar": 15,
+      "bloodPressure": {
+        "systolic": 40,
+        "diastolic": 52
       },
-      "heartRate" : 30,
-      "temp" : 50,
-      "time" : "2024-10-20T10:00:00"
+      "heartRate": 30,
+      "temp": 90,
+      "time": "2024-10-20T10:00:00",
+      "id": "7603"
     },
     {
-      "name" : "afuah",
-      "age" : "53", 
-      "weight" : "34",
-      "height" : "161",
-      "gender" : "female",
-      "bloodSugar" : 50,
-      "bloodPressure" : {
-          "systolic": 42,
-          "diastolic": 52
+      "name": "afuah",
+      "age": "53",
+      "weight": "34",
+      "height": "161",
+      "gender": "female",
+      "bloodSugar": 50,
+      "bloodPressure": {
+        "systolic": 42,
+        "diastolic": 52
       },
-      "heartRate" : 32,
-      "temp" : 50,
-      "time" : "2024-10-20T11:00:00"
+      "heartRate": 32,
+      "temp": 90,
+      "time": "2024-10-20T11:00:00",
+      "id": "5e6a"
+    },
+    {
+      "id": "ba5a",
+      "name": "afuah",
+      "age": "53",
+      "weight": "200",
+      "height": "170",
+      "gender": "female",
+      "bloodSugar": 80,
+      "bloodPressure": {
+        "systolic": 102,
+        "diastolic": 72
+      },
+      "heartRate": 98,
+      "temp": 99,
+      "time": "2025-01-08T17:30:52.194Z"
+    },
+    {
+      "id": "d3e3",
+      "name": "afuah",
+      "age": "53",
+      "weight": "",
+      "height": "",
+      "gender": "female",
+      "bloodSugar": 80,
+      "bloodPressure": {
+        "systolic": 102,
+        "diastolic": 72
+      },
+      "heartRate": "30",
+      "temp": 99,
+      "time": "2025-01-15T18:08:57.401Z"
+    },
+    {
+      "id": "6dbe",
+      "name": "afuah",
+      "age": "53",
+      "weight": "200",
+      "height": "170",
+      "gender": "female",
+      "bloodSugar": 80,
+      "bloodPressure": {
+        "systolic": 102,
+        "diastolic": 72
+      },
+      "heartRate": 98,
+      "temp": 99,
+      "time": "2025-01-15T18:12:18.146Z"
+    },
+    {
+      "id": "ae88",
+      "name": "afuah",
+      "age": "53",
+      "weight": "200",
+      "height": "170",
+      "gender": "female",
+      "bloodSugar": "150",
+      "bloodPressure": {
+        "systolic": "150",
+        "diastolic": "120"
+      },
+      "heartRate": "200",
+      "temp": 90,
+      "time": "2025-01-16T15:46:59.282Z"
+    },
+    {
+      "id": "9ac8",
+      "name": "afuah",
+      "age": "53",
+      "weight": "200",
+      "height": "170",
+      "gender": "female",
+      "bloodSugar": "200",
+      "bloodPressure": {
+        "systolic": "150",
+        "diastolic": "200"
+      },
+      "heartRate": "500",
+      "temp": "100",
+      "time": "2025-01-17T17:20:15.039Z"
+    }
+  ],
+  "reminder": [
+    {
+      "id": "1",
+      "drug_name": "Chloroquine",
+      "pill_time": "2024-10-20T09:00:00",
+      "dosage": "500ml",
+      "email_notification": true
     }
   ]
 }

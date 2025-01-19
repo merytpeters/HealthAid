@@ -1,7 +1,7 @@
 
-const Card = ({children ,newStyle = {} ,}) => {
+const Card = ({children ,newStyle = {} ,func, className = "card"}) => {
     return (
-        <div className="card" style={{...newStyle}} id="card">
+        <div  style={{...newStyle}} id="card" onClick={func} className={className}>
             {children}
         </div>
         
