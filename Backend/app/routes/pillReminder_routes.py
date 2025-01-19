@@ -4,6 +4,7 @@ from app.models.pillReminder import PillReminder
 from datetime import datetime
 from werkzeug.exceptions import NotFound
 from flask_mail import Message
+import logging
 
 pill_reminder_bp = Blueprint('pill_reminder', __name__)
 
@@ -12,11 +13,11 @@ pill_reminder_bp = Blueprint('pill_reminder', __name__)
 def send_notification(id):
     reminder = PillReminder.query.get(id)
     if reminder:
-        if reminder.user:  # Ensure reminder has a user before trying to send the email
+        if reminder.user and reminder.email_notification:  # Check if email_notification is True
             send_email_notification(reminder)
             return jsonify({"message": f"Notification sent for {reminder.drug_name}."}), 200
         else:
-            return jsonify({"error": "No associated user found for this pill reminder."}), 404
+            return jsonify({"error": "Email notification is disabled for this reminder or no user found."}), 400
     return jsonify({"error": "Pill reminder not found."}), 404
 
 def send_email_notification(reminder):
@@ -53,7 +54,7 @@ def update_pill_reminder(id):
             reminder.drug_name = drug_name
         if pill_time:
             try:
-                reminder.pill_time = datetime.strptime(pill_time, "%H:%M:%S").time()
+                reminder.pill_time = datetime.strptime(pill_time, "%H:%M:%S").time()  # Ensuring time format
             except ValueError:
                 return jsonify({"message": "Invalid time format. Please use HH:MM:SS."}), 400
         if dosage:
@@ -68,11 +69,16 @@ def update_pill_reminder(id):
         db.session.rollback()
         return jsonify({"error": f"An error occurred while updating the reminder: {str(e)}"}), 500
 
-# Route to view all pill reminders
+# Route to view pill reminders
 @pill_reminder_bp.route('/view_reminders', methods=['GET'])
 def view_reminders():
     try:
-        reminders = PillReminder.query.all()
+        user_id = request.args.get('user_id', type=int)  # Get user_id from query parameter
+        if user_id:
+            reminders = PillReminder.query.filter_by(user_id=user_id).all()  # Filter by user_id
+        else:
+            reminders = PillReminder.query.all()  # If no user_id is provided, return all reminders
+
         if not reminders:
             return jsonify({"message": "No pill reminders found."}), 404
 
@@ -80,7 +86,7 @@ def view_reminders():
             {
                 "id": reminder.id,
                 "drug_name": reminder.drug_name,
-                "pill_time": str(reminder.pill_time),
+                "pill_time": str(reminder.pill_time),  # Ensure proper string formatting
                 "dosage": reminder.dosage,
                 "email_notification": reminder.email_notification
             }
@@ -101,7 +107,7 @@ def add_reminder():
         if not data.get('drug_name') or not data.get('pill_time') or not data.get('dosage') or not data.get('user_id'):
             return jsonify({"error": "Missing required fields: drug_name, pill_time, dosage, or user_id."}), 400
 
-        # Convert pill_time to a datetime object
+        # Convert pill_time to a time object
         try:
             pill_time = datetime.strptime(data['pill_time'], "%H:%M:%S").time()
         except ValueError:
@@ -124,3 +130,24 @@ def add_reminder():
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": f"An error occurred while adding the reminder: {str(e)}"}), 500
+
+# Route to delete a pill reminder
+@pill_reminder_bp.route('/delete_reminder/<int:id>', methods=['DELETE'])
+def delete_pill_reminder(id):
+    try:
+        # Query the pill reminder by ID
+        reminder = PillReminder.query.get(id)
+        if not reminder:
+            raise NotFound("Pill reminder not found.")
+
+        # Delete the reminder from the session
+        db.session.delete(reminder)
+        db.session.commit()
+
+        return jsonify({"message": "Pill reminder deleted successfully!"}), 200
+    except NotFound as e:
+        return jsonify({"error": str(e).split(": ", 1)[1]}), 404
+    except Exception as e:
+        db.session.rollback()
+        logging.error(f"Error deleting reminder: {str(e)}")
+        return jsonify({"error": f"An error occurred while deleting the reminder: {str(e)}"}), 500

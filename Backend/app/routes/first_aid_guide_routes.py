@@ -1,61 +1,44 @@
 from flask import Blueprint, request, jsonify
 import os
-import requests
+import openai
 
+# Initialize Flask Blueprint
 first_aid_bp = Blueprint('first_aid_guide', __name__)
 
-OPENFDA_API_URL = os.getenv('OPENFDA_API_URL', 'https://api.fda.gov/drug/label.json')
-
-def decode_unicode_escape(text):
-    if isinstance(text, str):
-        # Decode standard unicode escape sequences properly
-        text = text.encode('utf-8').decode('unicode_escape')
-        # Replace specific Unicode sequences (like \u2022) with corresponding characters
-        text = text.replace("\u2022", "•")
-        return text
-    return text
+# Set OpenAI API Key from environment variable
+openai.api_key = os.getenv('API_KEY')
 
 @first_aid_bp.route('/guide', methods=['POST'])
 def first_aid_guide():
+    """
+    Endpoint for providing first aid guidance using OpenAI's API.
+    Accepts a JSON body with a 'query' field specifying the user's query.
+    """
     data = request.json
     query = data.get('query', '')
 
+    # Validate input
     if not query:
         return jsonify({'error': 'No query provided'}), 400
 
     try:
-        # Construct the request URL
-        request_url = f"{OPENFDA_API_URL}?search=indications_and_usage:{query}&limit=1"
-        print(f"Request URL: {request_url}")  # Debugging: print the request URL
+        # Use OpenAI's ChatCompletion to generate a response
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful first aid assistant."},
+                {"role": "user", "content": f"Provide first aid guidance for: {query}"}
+            ]
+        )
 
-        # Make the API request
-        response = requests.get(request_url)
-        print(f"Response Status Code: {response.status_code}")  # Debugging: print status code
-        print(f"Response Text: {response.text}")  # Debugging: print raw response
+        # Extract and return the AI-generated response
+        ai_response = response['choices'][0]['message']['content']
+        return jsonify({'response': ai_response}), 200
 
-        # Check if the response status is okay
-        response.raise_for_status()  # Raise an error for bad status codes
-
-        # Parse the response
-        response_data = response.json()
-        print(f"Response Data: {response_data}")  # Debugging: print the response data
-
-        if 'results' in response_data and response_data['results']:
-            result = response_data['results'][0]
-
-            # Extract and decode information
-            information = {
-                'brand_name': decode_unicode_escape(result.get('openfda', {}).get('brand_name', ['N/A'])[0] if 'openfda' in result else 'N/A'),
-                'generic_name': decode_unicode_escape(result.get('openfda', {}).get('generic_name', ['N/A'])[0] if 'openfda' in result else 'N/A'),
-                'dosage_and_administration': decode_unicode_escape(result.get('dosage_and_administration', 'N/A')),
-                'indications_and_usage': decode_unicode_escape(result.get('indications_and_usage', 'N/A')),
-                'purpose': decode_unicode_escape(result.get('purpose', 'N/A'))
-            }
-
-            return jsonify({'response': information})
-
-        else:
-            return jsonify({'error': 'No results found'}), 404
-
-    except requests.exceptions.RequestException as e:
+    except openai.error.OpenAIError as e:
+        # Handle OpenAI API errors gracefully
         return jsonify({'error': str(e)}), 500
+
+    except Exception as e:
+        # Handle unexpected server errors
+        return jsonify({'error': f"An unexpected error occurred: {str(e)}"}), 500
