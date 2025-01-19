@@ -25,7 +25,7 @@ const PillReminder = () => {
     useEffect(() => {
         const fetchdata = async () => {
             try {
-                const res = await fetch('http://localhost:8000/reminder')
+                const res = await fetch('/api/pill_reminder/view_reminders')
                 const data = await res.json();
                 setData(data)
             } catch (e) {
