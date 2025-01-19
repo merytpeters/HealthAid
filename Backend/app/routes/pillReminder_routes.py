@@ -8,6 +8,7 @@ import logging
 
 pill_reminder_bp = Blueprint('pill_reminder', __name__)
 
+
 # Define the pill_time format
 PILL_TIME_FORMAT = "%y%m%d %H:%M:%S"
 
@@ -27,6 +28,10 @@ def send_email_notification(reminder):
     try:
         from app import mail  # Import mail inside the function to avoid circular import
 
+        # Import mail inside the function to avoid circular import
+        from app import mail
+
+        # Ensure reminder has a valid user and user has an email
         if reminder.user and reminder.user.email:
             msg = Message('Pill Reminder', recipients=[reminder.user.email])
             msg.body = f"Reminder to take your medication: {reminder.drug_name} at {reminder.pill_time}."
@@ -57,6 +62,9 @@ def update_pill_reminder(id):
                 reminder.pill_time = datetime.strptime(pill_time, PILL_TIME_FORMAT)  # Parse using updated format
             except ValueError:
                 return jsonify({"message": f"Invalid datetime format. Please use {PILL_TIME_FORMAT}."}), 400
+                reminder.pill_time = datetime.strptime(pill_time, "%H:%M:%S").time()  # Ensuring time format
+            except ValueError:
+                return jsonify({"message": "Invalid time format. Please use HH:MM:SS."}), 400
         if dosage:
             reminder.dosage = dosage
         reminder.email_notification = email_notification
@@ -87,6 +95,7 @@ def view_reminders():
                 "id": reminder.id,
                 "drug_name": reminder.drug_name,
                 "pill_time": reminder.pill_time.strftime(PILL_TIME_FORMAT),  # Format datetime
+                "pill_time": str(reminder.pill_time),  # Ensure proper string formatting
                 "dosage": reminder.dosage,
                 "email_notification": reminder.email_notification
             }
@@ -105,13 +114,16 @@ def add_reminder():
         # Validate input
         if not data.get('drug_name') or not data.get('pill_time') or not data.get('dosage') or not data.get('user_id'):
             return jsonify({"error": "Missing required fields: drug_name, pill_time, dosage, or user_id."}), 400
-
         # Convert pill_time to a datetime object
         try:
             pill_time = datetime.strptime(data['pill_time'], PILL_TIME_FORMAT)
         except ValueError:
             return jsonify({"error": f"Invalid datetime format. Please use {PILL_TIME_FORMAT}."}), 400
-
+        # Convert pill_time to a time object
+        try:
+            pill_time = datetime.strptime(data['pill_time'], "%H:%M:%S").time()
+        except ValueError:
+            return jsonify({"error": "Invalid time format. Please use HH:MM:SS."}), 400
         # Create a new pill reminder object
         reminder = PillReminder(
             drug_name=data['drug_name'],

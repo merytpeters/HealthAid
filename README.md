@@ -70,8 +70,7 @@ HealthAid was developed by the following individuals:
 
 - **Isah Abdulsalam** - Backend Developer
    GitHub: [Isah Abdulsalam](https://github.com/Isah Abdulsalam)
-   Email: <a href="Isahabdulsalam416@gmail.com
-
+   Email: [Isah Abdulsalam] (isahabdulsalam416@gmail.com)
   
 ## Acknowledgements
 We would like to express our sincere gratitude to the ALX Software Engineering program for providing the tools and resources that allowed us to develop this project. We also appreciate the support and feedback from our peers, mentors, and anyone who has contributed their expertise.

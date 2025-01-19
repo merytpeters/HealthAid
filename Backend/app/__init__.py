@@ -26,6 +26,7 @@ from app.routes.first_aid_guide_routes import first_aid_bp
 from app.routes.medicalJournal_routes import medical_journal_bp
 from app.routes.dashboard_routes import dashboard_bp
 # from app.routes.symptomChecker_routes import symptom_checker_bp
+from app.routes.symptomChecker_routes import symptom_checker_bp
 from app.routes.drug_interaction_checker_routes import drug_interaction_checker_bp
 from flask_cors import CORS
 
