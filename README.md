@@ -2,7 +2,7 @@
 HealthAid is a comprehensive personal health management app designed to address common medical needs. This project serves as a final portfolio submission for the Software Engineering program at ALX. The app incorporates essential health management features such as a drug interaction checker, a symptom checker, pill reminders, a first aid guide, a health symptoms journal, and a home medicine inventory.
 
 It aims to empower users to manage their health proactively and safely by providing easy-to-use tools. The app is designed to help users track symptoms, ensure safe medication use, and respond to medical emergencies efficiently.
-Features
+## Features
 ### 1. Drug Interaction Checker
 - Helps users check the interactions between different medications, ensuring they take them safely.
 
@@ -52,20 +52,21 @@ To run HealthAid locally, follow these steps:
    ```
 
 The app will be accessible on your local machine at `http://localhost:5000`.
-Authors
+
+## Authors
 HealthAid was developed by the following individuals:
 
 - **Afuah Sekyiwaa Adusei** - Frontend Developer and Project Manager
    GitHub: [Afuah-Sekyiwaa-Adusei](https://github.com/)
-   Email: [Afuah-Sekyiwaa-Aduse] (.com)
+   Email: 
 
 - **Precious Appiah** - Frontend Developer
    GitHub: [Precious Appiah](https://github.com/)
-   Email: [Precious Appiah] (.com)
+   Email:
 
 - **Akpevweoghene Edafe** - Backend Developer and Project Manager
    GitHub: [Akpevweoghene Edafe](https://github.com/)
-   Email: [Akpevweoghene Edafe] (.com)
+   Email: 
 
 - **Isah Abdulsalam** - Backend Developer
    GitHub: [Isah Abdulsalam](https://github.com/Isah Abdulsalam)
@@ -75,7 +76,8 @@ HealthAid was developed by the following individuals:
 We would like to express our sincere gratitude to the ALX Software Engineering program for providing the tools and resources that allowed us to develop this project. We also appreciate the support and feedback from our peers, mentors, and anyone who has contributed their expertise.
 
 This project aims to provide useful tools for personal health management, but it is important to note that HealthAid does not replace medical consultations with professionals. The information provided in the app is based on general guidelines and may not always be 100% accurate. Always consult with a physician for a proper diagnosis.
-Challenges
+
+## Challenges
 This project came with several challenges:
 
 1. **Regulatory Requirements**: Health apps are typically regulated by health organizations, but due to time constraints, we were unable to ensure full compliance with all regulatory standards.
@@ -85,5 +87,6 @@ This project came with several challenges:
 3. **API Integration**: Integrating APIs for the Symptom Checker and Drug Interaction Checker posed technical difficulties, especially with ensuring the accuracy and reliability of the data provided.
 
 4. **Time Constraints**: Due to the strict timeline for the final portfolio submission, we were unable to implement some additional features and complete all documentation.
+
 ## Conclusion
 HealthAid is designed to serve as a reliable health management assistant, empowering users to take control of their wellness. While it provides valuable features such as medication tracking, symptom logging, and first aid information, it is not intended to replace professional healthcare services. We are proud of the work completed during this project and look forward to future updates that will further enhance its capabilities.
