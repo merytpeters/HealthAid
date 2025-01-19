@@ -1,20 +1,15 @@
 from flask import Blueprint, request, jsonify
 from app import db
 from app.models.pillReminder import PillReminder
-from datetime import datetime, timedelta
+from datetime import datetime
 from werkzeug.exceptions import NotFound
 from flask_mail import Message
 import logging
-import time
 
 pill_reminder_bp = Blueprint('pill_reminder', __name__)
 
-# Helper function to validate datetime format
-def validate_datetime_format(pill_time):
-    try:
-        return datetime.strptime(pill_time, "%H:%M:%S").time()
-    except ValueError:
-        return None  # Invalid format
+# Define the pill_time format
+PILL_TIME_FORMAT = "%y%m%d %H:%M:%S"
 
 # Route to send notification
 @pill_reminder_bp.route('/send_notification/<int:id>', methods=['POST'])
@@ -30,15 +25,13 @@ def send_notification(id):
 
 def send_email_notification(reminder):
     try:
-        # Ensure reminder has a valid user and user has an email
+        from app import mail  # Import mail inside the function to avoid circular import
+
         if reminder.user and reminder.user.email:
-            # Import mail here to avoid circular import
-            from app import mail
             msg = Message('Pill Reminder', recipients=[reminder.user.email])
             msg.body = f"Reminder to take your medication: {reminder.drug_name} at {reminder.pill_time}."
             mail.send(msg)
         else:
-            # Handle case where user does not have a valid email or is missing
             print("User does not have a valid email or is missing.")
     except Exception as e:
         print(f"Error sending email: {e}")
@@ -60,11 +53,10 @@ def update_pill_reminder(id):
         if drug_name:
             reminder.drug_name = drug_name
         if pill_time:
-            formatted_pill_time = validate_datetime_format(pill_time)
-            if formatted_pill_time:
-                reminder.pill_time = formatted_pill_time  # Update pill time after validation
-            else:
-                return jsonify({"message": "Invalid time format. Please use HH:MM:SS."}), 400
+            try:
+                reminder.pill_time = datetime.strptime(pill_time, PILL_TIME_FORMAT)  # Parse using updated format
+            except ValueError:
+                return jsonify({"message": f"Invalid datetime format. Please use {PILL_TIME_FORMAT}."}), 400
         if dosage:
             reminder.dosage = dosage
         reminder.email_notification = email_notification
@@ -94,7 +86,7 @@ def view_reminders():
             {
                 "id": reminder.id,
                 "drug_name": reminder.drug_name,
-                "pill_time": str(reminder.pill_time),
+                "pill_time": reminder.pill_time.strftime(PILL_TIME_FORMAT),  # Format datetime
                 "dosage": reminder.dosage,
                 "email_notification": reminder.email_notification
             }
@@ -108,17 +100,17 @@ def view_reminders():
 @pill_reminder_bp.route('/add_reminder', methods=['POST'])
 def add_reminder():
     try:
-        # Get the data from the request
         data = request.get_json()
 
-        # Validate the input data
+        # Validate input
         if not data.get('drug_name') or not data.get('pill_time') or not data.get('dosage') or not data.get('user_id'):
             return jsonify({"error": "Missing required fields: drug_name, pill_time, dosage, or user_id."}), 400
 
-        # Validate pill_time
-        pill_time = validate_datetime_format(data['pill_time'])
-        if not pill_time:
-            return jsonify({"error": "Invalid time format. Please use HH:MM:SS."}), 400
+        # Convert pill_time to a datetime object
+        try:
+            pill_time = datetime.strptime(data['pill_time'], PILL_TIME_FORMAT)
+        except ValueError:
+            return jsonify({"error": f"Invalid datetime format. Please use {PILL_TIME_FORMAT}."}), 400
 
         # Create a new pill reminder object
         reminder = PillReminder(
@@ -142,12 +134,10 @@ def add_reminder():
 @pill_reminder_bp.route('/delete_reminder/<int:id>', methods=['DELETE'])
 def delete_pill_reminder(id):
     try:
-        # Query the pill reminder by ID
         reminder = PillReminder.query.get(id)
         if not reminder:
             raise NotFound("Pill reminder not found.")
 
-        # Delete the reminder from the session
         db.session.delete(reminder)
         db.session.commit()
 
